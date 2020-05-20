@@ -1,0 +1,276 @@
+@font-face {
+  font-family: 'Frank Ruhl Libre - Black';
+  src: url("./assets/fonts/Frank_Ruhl_Libre/FrankRuhlLibre-Black.ttf") format("truetype");
+}
+@font-face {
+  font-family: 'Frank Ruhl Libre - Bold';
+  src: url("./assets/fonts/Frank_Ruhl_Libre/FrankRuhlLibre-Bold.ttf") format("truetype");
+}
+@font-face {
+  font-family: 'Frank Ruhl Libre - Light';
+  src: url("./assets/fonts/Frank_Ruhl_Libre/FrankRuhlLibre-Light.ttf") format("truetype");
+}
+@font-face {
+  font-family: 'Frank Ruhl Libre - Medium';
+  src: url("./assets/fonts/Frank_Ruhl_Libre/FrankRuhlLibre-Medium.ttf") format("truetype");
+}
+@font-face {
+  font-family: 'Frank Ruhl Libre - Regular';
+  src: url("./assets/fonts/Frank_Ruhl_Libre/FrankRuhlLibre-Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: 'Gotham Pro - Light';
+  src: url("./assets/fonts/GothamPro-Light.eot?") format("eot"),
+       url("./assets/fonts/GothamPro-Light.otf") format("opentype"),
+       url("./assets/fonts/GothamPro-Light.woff") format("woff"),
+       url("./assets/fonts/GothamPro-Light.ttf") format("truetype"),
+       url("./assets/fonts/GothamPro-Light.svg#GothamPro-Light") format("svg");
+}
+
+@font-face {
+  font-family: 'Gotham Pro - LightItalic';
+  src: url("./assets/fonts/GothamPro-LightItalic.eot?") format("eot"),
+       url("./assets/fonts/GothamPro-LightItalic.otf") format("opentype"),
+       url("./assets/fonts/GothamPro-LightItalic.woff") format("woff"),
+       url("./assets/fonts/GothamPro-LightItalic.ttf") format("truetype"),
+       url("./assets/fonts/GothamPro-LightItalic.svg#GothamPro-LightItalic") format("svg");
+}
+
+@font-face {
+  font-family: 'Gotham Pro';
+  src: url("./assets/fonts/GothamPro.eot?") format("eot"),
+       url("./assets/fonts/GothamPro.otf") format("opentype"),
+       url("./assets/fonts/GothamPro.woff") format("woff"),
+       url("./assets/fonts/GothamPro.ttf") format("truetype"),
+       url("./assets/fonts/GothamPro.svg#GothamPro") format("svg");
+}
+
+@font-face {
+  font-family: 'GothamPro-Medium';
+  src: url("./assets/fonts/GothamPro-Medium.eot?") format("eot"),
+       url("./assets/fonts/GothamPro-Medium.otf") format("opentype"),
+       url("./assets/fonts/GothamPro-Medium.woff") format("woff"),
+       url("./assets/fonts/GothamPro-Medium.ttf") format("truetype"),
+       url("./assets/fonts/GothamPro-Medium.svg#GothamPro-Medium") format("svg");
+}
+
+@font-face {
+  font-family: 'Gotham Pro - Bold';
+  src: url("./assets/fonts/GothamPro-Bold.eot?") format("eot"),
+       url("./assets/fonts/GothamPro-Bold.otf") format("opentype"),
+       url("./assets/fonts/GothamPro-Bold.woff") format("woff"),
+       url("./assets/fonts/GothamPro-Bold.ttf") format("truetype"),
+       url("./assets/fonts/GothamPro-Bold.svg#GothamPro-Bold") format("svg");
+}
+
+@font-face {
+  font-family: 'GothamPro-Black';
+  src: url("./assets/fonts/GothamPro-Black.eot?") format("eot"),
+       url("./assets/fonts/GothamPro-Black.otf") format("opentype"),
+       url("./assets/fonts/GothamPro-Black.woff") format("woff"),
+       url("./assets/fonts/GothamPro-Black.ttf") format("truetype"),
+       url("./assets/fonts/GothamPro-Black.svg#GothamPro-Black") format("svg");
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+html {
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+
+body {
+  margin: 0;
+  font-family: "Gotham Pro";
+  font-size: 16px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  color: #415464;
+  background-image: url("./assets/images/shape.png"), linear-gradient(#00437b,#002856);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+a,
+a:visited {
+  text-decoration: none;
+  outline: none;
+}
+
+a:focus, a:visited:focus,
+button:focus {
+  outline: none;
+}
+a{
+  color: #407ec9;
+}
+
+h1 {
+  font-family: "FrankRuhlLibre";
+  font-size: 56px;
+  font-weight: 900;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.25;
+  letter-spacing: normal;
+  color: #415464;
+}
+h2 {
+  font-family: "FrankRuhlLibre";
+  font-size: 48px;
+  font-weight: 900;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.25;
+  letter-spacing: normal;
+  color: #415464;
+}
+h3 {
+  font-family: "Gotham Pro";
+  font-size: 40px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.25;
+  letter-spacing: normal;
+  color: #415464;
+}
+h4 {
+  font-family: "Gotham Pro";
+  font-size: 32px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.25;
+  letter-spacing: normal;
+  color: #415464;
+}
+h5 {
+  font-family: "Gotham Pro";
+  font-size: 24px;
+  font-weight: 300;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  color: #415464;
+}
+h6 {
+  font-family: "FrankRuhlLibre";
+  font-size: 24px;
+  font-weight: 300;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  color: #415464;
+}
+
+.editor-styles-wrapper p,
+p{
+  font-family: "Gotham Pro";
+  font-size: 16px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 2;
+  letter-spacing: normal;
+  color: #415464;
+}
+
+strong{
+  font-family: 'Gotham Pro - Bold';
+  color: #415464;
+}
+
+p.alt {
+  font-family: "Gotham Pro";
+  font-size: 8px;
+  font-weight: 300;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  color: #415464;
+}
+
+@media screen and (max-width: 900px){
+  h1 {
+    font-family: "FrankRuhlLibre";
+    font-size: 32px;
+    font-weight: 900;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.25;
+    letter-spacing: normal;
+    color: #415464;
+  }
+  h2 {
+    font-family: "FrankRuhlLibre";
+    font-size: 24px;
+    font-weight: 900;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.33;
+    letter-spacing: normal;
+    color: #415464;
+  }
+  h3 {
+    font-family: "Gotham Pro";
+    font-size: 24px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.33;
+    letter-spacing: normal;
+    color: #415464;
+  }
+  h4 {
+    font-family: "Gotham Pro";
+    font-size: 24px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.33;
+    letter-spacing: normal;
+    color: #415464;
+  }
+  h5 {
+    font-family: "Gotham Pro";
+    font-size: 18px;
+    font-weight: 300;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.56;
+    letter-spacing: normal;
+    color: #415464;
+  }
+  h6 {
+    font-family: "FrankRuhlLibre";
+    font-size: 18px;
+    font-weight: 300;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.56;
+    letter-spacing: normal;
+    color: #415464;
+  }
+  p {
+    font-family: "Gotham Pro";
+    font-size: 12px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 2;
+    letter-spacing: normal;
+  }
+
+}
+
+
