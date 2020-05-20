@@ -92,9 +92,6 @@ body {
   line-height: 1.5;
   letter-spacing: normal;
   color: #415464;
-  background-image: url("./assets/images/shape.png"), linear-gradient(#00437b,#002856);
-  background-repeat: no-repeat;
-  background-size: cover;
 }
 
 a,

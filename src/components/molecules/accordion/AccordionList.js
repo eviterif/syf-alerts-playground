@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import * as faSolid from '@fortawesome/free-solid-svg-icons';
 import initialState from "./Accordion.Data";
 
-import AccordionItem from '';
+import AccordionItem from '../../atoms/accordion/AccordionItem';
 import {PageWrapper, SectionTitle } from './AccordionListStyles';
 
 const accordionReducer = (state, action) => {
