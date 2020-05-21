@@ -20,8 +20,4 @@ export const PageWrapper = styled.div`
 
 `;
 
-export const SectionTitle = styled.div`
-    font-size: 20px;
-    margin-bottom: 10px;
-    text-align: left;
-`;
+

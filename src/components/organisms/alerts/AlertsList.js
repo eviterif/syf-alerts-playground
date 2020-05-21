@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect } from "react";
-import {func, object, array} from 'prop-types';
+import {func, array} from 'prop-types';
 import {connect} from 'react-redux';
 import {
     getAlertsData, 
@@ -11,11 +11,9 @@ import {
     turnNotificationOff
 } from "../../../store/actions/alerts";
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import * as faSolid from '@fortawesome/free-solid-svg-icons';
-
+import SectionTitle from '../../atoms/alerts/sectionTitle/SectionTitle'
 import AlertItem from '../../molecules/alerts/AlertsItem';
-import {PageWrapper, SectionTitle } from './AlertsListStyles';
+import {PageWrapper} from './AlertsListStyles';
 
 const AlertsList = ({
     alerts, 
@@ -109,9 +107,7 @@ const AlertsList = ({
             {alerts.map((obj, alertIndex)=>{
                 return (
                     <div key={alertIndex} className="SectionWrapper">
-                        <SectionTitle>
-                            <FontAwesomeIcon icon={faSolid[obj.sectionIconName]} color="#307ab0" /> {obj.sectionTitle} 
-                        </SectionTitle>
+                        <SectionTitle title={obj.sectionTitle} iconName={obj.sectionIconName} />
                         {obj.items.map( (item, itemIndex) => {
                             return (
                                 <AlertItem 

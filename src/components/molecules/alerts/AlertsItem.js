@@ -38,7 +38,6 @@ export default function AlertItem({
                 alertIndex={alertIndex}
                 itemIndex={itemIndex}
                 expandAccordionHandler={expandAccordion}
-
                 isNotificationON={item.header.isOn ? true : false}
                 communicationMethodClick={communicationMethodClick}
             />
@@ -48,7 +47,6 @@ export default function AlertItem({
                 alertIndex={alertIndex}
                 itemIndex={itemIndex}
                 expandAccordionHandler={expandAccordion}
-
                 buttonClickHandler={buttonClickHandler}
                 inputChangeHandler={inputChangeHandler}
                 communicationMethodClick={communicationMethodClick}
