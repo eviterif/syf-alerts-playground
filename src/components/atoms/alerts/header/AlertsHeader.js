@@ -1,9 +1,20 @@
 import React from "react";
+import {string, number, func, object, array, bool} from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import * as faSolid from '@fortawesome/free-solid-svg-icons';
 import {AccordionHeaderWrapper} from './AlertsHeaderStyles';
 
-export default function AlertsHeader({isExpanded, isNotificationON, title, input, icons, alertIndex, itemIndex, expandAccordionHandler, communicationMethodClick}){
+export default function AlertsHeader({
+    isExpanded, 
+    isNotificationON, 
+    title, 
+    input, 
+    icons, 
+    alertIndex, 
+    itemIndex, 
+    expandAccordionHandler, 
+    communicationMethodClick
+}){
     let header_tittle = title;
     let dollar_pattern =  /(?:%s)/;
     let date_pattern = /(?:%d)/;
@@ -53,4 +64,16 @@ export default function AlertsHeader({isExpanded, isNotificationON, title, input
             </div>
         </AccordionHeaderWrapper>
     )
+}
+
+AlertsHeader.propTypes = {
+    isExpanded: bool,
+    isNotificationON: bool, 
+    title: string, 
+    input: object, 
+    icons: array, 
+    alertIndex: number, 
+    itemIndex: number, 
+    expandAccordionHandler: func, 
+    communicationMethodClick: func
 }

@@ -1,72 +1,48 @@
-import React, {useReducer, useCallback} from "react";
+import React, { useCallback, useEffect } from "react";
+import {func, object, array} from 'prop-types';
+import {connect} from 'react-redux';
+import {
+    getAlertsData, 
+    updateInputValue,
+    setErrorMessage,
+    setCommunicationMethod,
+    unSetCommunicationMethod,
+    turnNotificationOn,
+    turnNotificationOff
+} from "../../../store/actions/alerts";
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import * as faSolid from '@fortawesome/free-solid-svg-icons';
-import initialState from "./Alerts.Data";
 
 import AlertItem from '../../molecules/alerts/AlertsItem';
 import {PageWrapper, SectionTitle } from './AlertsListStyles';
 
-const accordionReducer = (state, action) => {
-    switch (action.type){
-        case "SHOW_PANEL":
-            let tmp_state = {...state}; 
-            tmp_state.alerts[action.alertIndex].items[action.itemIndex].body.isVisible = true;
-            return tmp_state;
-        case "HIDE_PANEL":
-            let tmp_state_hide_panel = {...state}; 
-            tmp_state_hide_panel.alerts[action.alertIndex].items[action.itemIndex].body.isVisible = false;
-            return tmp_state_hide_panel;
-        case "UPDATE_INPUT": 
-            let temporary_state = {...state}; 
-            temporary_state.alerts[action.alertIndex].items[action.itemIndex].body.leftSection.input.inputValue = action.value;
-            return temporary_state;
-        case "TURN_ON":
-            let tmp_state_turn_on = {...state}; 
-            tmp_state_turn_on.alerts[action.alertIndex].items[action.itemIndex].header.isOn = true;
-            return tmp_state_turn_on;
-        case "TURN_OFF":
-            let tmp_state_turn_off = {...state}; 
-            tmp_state_turn_off.alerts[action.alertIndex].items[action.itemIndex].header.isOn = false;
-            tmp_state_turn_off.alerts[action.alertIndex].items[action.itemIndex].icons.map( (obj) => {
-                if(obj.isOn){
-                    obj.isOn = false;
-                }
-                return obj;
-            })
-            return tmp_state_turn_off;
-        case "SET_ERROR_MESSAGE":
-            let tmp_state_error_message = {...state}; 
-            tmp_state_error_message.alerts[action.alertIndex].items[action.itemIndex].body.leftSection.input.inputError = action.errorMessage;
-            return tmp_state_error_message;
-        case "SET_COMMUNICATION_METHOD":
-            let tmp_communication_method_state = {...state}; 
-            tmp_communication_method_state.alerts[action.alertIndex].items[action.itemIndex].icons[action.iconIndex].isOn = true;
-            return  tmp_communication_method_state
-        case "UNSET_COMMUNICATION_METHOD":
-            let tmp_communication_unset_method_state = {...state}; 
-            tmp_communication_unset_method_state.alerts[action.alertIndex].items[action.itemIndex].icons[action.iconIndex].isOn = false;
-            return tmp_communication_unset_method_state
-        default: 
-            return state;
-    }
-}
+const AlertsList = ({
+    alerts, 
+    onGetAlertsData, 
+    onUpdateInputValue, 
+    onSetErrorMessage, 
+    onSetCommunicationMethod, 
+    onUnSetCommunicationMethod, 
+    onTurnNotificationOn, 
+    onTurnNotificationOff
+}) =>{
+   
+    const loadAlertsData = useCallback(async () => {
+        try {
+            await onGetAlertsData();
+        } catch (err) {
+            console.log(err)
+        }
+    }, [onGetAlertsData]);
 
-
-export default function AlertsList(){
-    const [currentState, dispatch ] = useReducer(accordionReducer, initialState);
-    const {alerts} = currentState;
-
-    // const expandAccordion = useCallback((alertIndex, itemIndex) => {
-    //     if(alerts[alertIndex].items[itemIndex].body.isVisible){
-    //         dispatch({type: "HIDE_PANEL", alertIndex: alertIndex, itemIndex: itemIndex });
-    //     }else{
-    //         dispatch({type: "SHOW_PANEL", alertIndex: alertIndex, itemIndex: itemIndex });
-    //     }
-    // }, [dispatch, alerts]);
+    useEffect(() => {
+        loadAlertsData()
+    }, [loadAlertsData]);
 
     const expandAccordion = useCallback( () => {}, [] )
 
-    const handleButtonClick = useCallback((alertIndex, itemIndex, label) =>{
+    const handleButtonClick = (alertIndex, itemIndex, label) =>{
         let tmp_label = label.toLowerCase();
         let communication_methods = alerts[alertIndex].items[itemIndex].icons.filter( (obj) => obj.isOn === true);
 
@@ -78,9 +54,9 @@ export default function AlertsList(){
             let tmp_value = alerts[alertIndex].items[itemIndex].body.leftSection.input.inputValue;
 
             if(tmp_value === ""){
-                dispatch({ type: "SET_ERROR_MESSAGE", alertIndex, itemIndex, errorMessage: "This field is required"});
+                onSetErrorMessage(alertIndex, itemIndex, "This field is required");
             }else{
-                dispatch({ type: "SET_ERROR_MESSAGE", alertIndex, itemIndex, errorMessage: ""});
+                onSetErrorMessage(alertIndex, itemIndex, "");
             }
 
             if(communication_methods.length <= 0){
@@ -88,7 +64,7 @@ export default function AlertsList(){
             }
 
             if(tmp_value !== "" && communication_methods.length > 0){
-                dispatch({type: "TURN_ON", alertIndex, itemIndex});
+                onTurnNotificationOn(alertIndex, itemIndex)
             }
         }
 
@@ -96,35 +72,37 @@ export default function AlertsList(){
             if(communication_methods.length <= 0){
                 alert("Please Select a communication method");
             }else{
-                dispatch({ type: "TURN_ON", alertIndex, itemIndex });
+                onTurnNotificationOn(alertIndex, itemIndex)
             } 
         }
 
         if(tmp_label === "turn off"){
-            dispatch({type: "TURN_OFF", alertIndex, itemIndex})
+            onTurnNotificationOff(alertIndex, itemIndex)
+
             if(alerts[alertIndex].items[itemIndex].body.leftSection.input){
-                dispatch({
-                    type: "UPDATE_INPUT", alertIndex, itemIndex, value: "" });
+                onUpdateInputValue(alertIndex, itemIndex, "");
             }
         }
-
-    },[dispatch, expandAccordion, alerts]);
+    }
 
     const handleInputOnChange = useCallback((alertIndex, itemIndex, value) => {
-        dispatch({ type: "UPDATE_INPUT", alertIndex, itemIndex, value });
-
+        onUpdateInputValue(alertIndex, itemIndex, value);
         if(value !== ''){
-            dispatch({ type: "SET_ERROR_MESSAGE", alertIndex, itemIndex, errorMessage: "" });
+            onSetErrorMessage(alertIndex, itemIndex, "");
         }
-    }, [dispatch]);
+    }, [onUpdateInputValue, onSetErrorMessage]);
 
-    const handleCommunicationMethodClick = useCallback( (alertIndex, itemIndex, iconIndex) => {
+    const handleCommunicationMethodClick = (alertIndex, itemIndex, iconIndex) => {
         if(alerts[alertIndex].items[itemIndex].icons[iconIndex].isOn){
-            dispatch({ type: "UNSET_COMMUNICATION_METHOD", alertIndex, itemIndex, iconIndex})
+            onUnSetCommunicationMethod(alertIndex, itemIndex, iconIndex);
         }else{
-            dispatch({ type: "SET_COMMUNICATION_METHOD", alertIndex, itemIndex, iconIndex})
+            onSetCommunicationMethod(alertIndex, itemIndex, iconIndex);
         }
-    },[dispatch, alerts]);
+    }
+
+    if(alerts.length <= 0 ){
+        return <p>Loading...</p>
+    }
 
     return (
         <PageWrapper>
@@ -154,3 +132,34 @@ export default function AlertsList(){
         </PageWrapper>
     )
 }
+
+const mapStateToProps = state => {
+    return {
+        alerts: state.alertsData.alerts
+    }
+} 
+
+const mapDispatchToProps = dispatch => {
+    return {
+        onGetAlertsData: () => dispatch(getAlertsData()),
+        onUpdateInputValue: (alertIndex, itemIndex, value) => dispatch(updateInputValue(alertIndex, itemIndex, value)),
+        onSetErrorMessage: (alertIndex, itemIndex, errorMessage) => dispatch(setErrorMessage(alertIndex, itemIndex, errorMessage)),
+        onSetCommunicationMethod: (alertIndex, itemIndex, iconIndex) => dispatch(setCommunicationMethod(alertIndex, itemIndex, iconIndex)),
+        onUnSetCommunicationMethod: (alertIndex, itemIndex, iconIndex) => dispatch(unSetCommunicationMethod(alertIndex, itemIndex, iconIndex)),
+        onTurnNotificationOn: (alertIndex, itemIndex) => dispatch(turnNotificationOn(alertIndex, itemIndex)),
+        onTurnNotificationOff: (alertIndex, itemIndex) => dispatch(turnNotificationOff(alertIndex, itemIndex)),
+    }
+}
+
+AlertsList.propTypes = {
+    alerts: array , 
+    onGetAlertsData: func, 
+    onUpdateInputValue: func, 
+    onSetErrorMessage: func, 
+    onSetCommunicationMethod: func, 
+    onUnSetCommunicationMethod: func, 
+    onTurnNotificationOn: func, 
+    onTurnNotificationOff: func
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AlertsList);

@@ -1,14 +1,25 @@
 import React from 'react';
+import {createStore, combineReducers, applyMiddleware, compose} from 'redux';
+import {Provider} from 'react-redux';
+import ReduxThunk from 'redux-thunk';
+import alertsReducer from '../../../store/reducer/alerts'; 
+
 import { withKnobs, object } from "@storybook/addon-knobs";
 import AlertsList from './AlertsList';
-import initialState from "./Accordion.Data";
+
+const rootReducer = combineReducers({
+  alertsData: alertsReducer,
+});
+
+const store = createStore(rootReducer, applyMiddleware(ReduxThunk));
 
 export default {
     component: AlertsList,
-    title: 'Molecules/Accordion',
+    title: 'Organisms/Alerts',
     decorators: [withKnobs],
     // Our exports that end in "Data" are not stories.
     excludeStories: /.*Data$/,
 };
 
-export const List = () => <AlertsList data={object('Data', initialState, 'Accordion' )}/>
+export const List = () => <Provider store={store}><AlertsList /></Provider>
+

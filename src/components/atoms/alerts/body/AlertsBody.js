@@ -1,4 +1,5 @@
 import React from "react";
+import { number, func, object, bool} from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import * as faSolid from '@fortawesome/free-solid-svg-icons';
 import {AccordionBodyWrapper, Input, AccordionBodyRightIconWrapper, Button } from './AlertsBodyStyles';
@@ -33,7 +34,7 @@ export default function AlertsBody({
                                     <Input 
                                         type={item.body.leftSection.input.inputType}
                                         value={item.body.leftSection.input.inputValue}
-                                        onChange={ (e) => inputChangeHandler(alertIndex, itemIndex, e.currentTarget.value) }
+                                        onChange={ (e) => { inputChangeHandler(alertIndex, itemIndex, e.currentTarget.value) }}
                                         placeholder={item.body.leftSection.input.inputPlaceholder} 
                                         hasErrors={ item.body.leftSection.input.inputError !== '' ? true : false } 
                                         hasIcon={item.body.leftSection.input.inputIcon !== '' ? true : false } />
@@ -84,4 +85,15 @@ export default function AlertsBody({
             </div>
         </AccordionBodyWrapper>
     )
+}
+
+AlertsBody.propTypes = {
+    item: object, 
+    isExpanded: bool, 
+    alertIndex: number, 
+    itemIndex: number, 
+    inputChangeHandler: func, 
+    buttonClickHandler: func, 
+    expandAccordionHandler: func,
+    communicationMethodClick: func
 }

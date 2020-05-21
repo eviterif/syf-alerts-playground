@@ -58,12 +58,11 @@ export default function AlertItem({
     )
 }
 
-// AccordionItem.propTypes = {
-//     item: object,
-//     alertIndex: number, 
-//     itemIndex: number,
-//     clickHandler: func, 
-//     communicationMethodClick: func,
-//     buttonClickHandler: func,
-//     inputChangeHandler: func 
-// }
+AlertItem.propTypes = {
+    item: object,
+    alertIndex: number, 
+    itemIndex: number,
+    communicationMethodClick: func,
+    buttonClickHandler: func,
+    inputChangeHandler: func 
+}

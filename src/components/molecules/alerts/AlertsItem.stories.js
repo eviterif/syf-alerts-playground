@@ -5,7 +5,7 @@ import AlertsItem from './AlertsItem';
 
 export default {
     component: AlertsItem,
-    title: 'Atoms/Accordion',
+    title: 'Atoms/Alerts',
     decorators: [withKnobs],
     // Our exports that end in "Data" are not stories.
     excludeStories: /.*Data$/,
