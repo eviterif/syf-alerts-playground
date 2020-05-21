@@ -1,10 +1,10 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
 import { withKnobs, object } from "@storybook/addon-knobs";
-import AccordionItem from './AccordionItem';
+import AlertsItem from './AlertsItem';
 
 export default {
-    component: AccordionItem,
+    component: AlertsItem,
     title: 'Atoms/Accordion',
     decorators: [withKnobs],
     // Our exports that end in "Data" are not stories.
@@ -49,7 +49,7 @@ const itemActions = {
     inputChangeHandler: action('input change event')
 }
 
-export const Default = () => <AccordionItem item={object('Data', itemData, 'Accordion' )} alertIndex="0" itemIndex="0" {...itemActions} />
+export const Default = () => <AlertsItem item={object('Data', itemData, 'Accordion' )} alertIndex="0" itemIndex="0" {...itemActions} />
 
 const itemDateCloseOn = {
     ...itemData,
@@ -74,7 +74,7 @@ const itemDateCloseOn = {
     }
 }
 
-export const AccordionCloseOn = () => <AccordionItem item={object('Data', itemDateCloseOn, 'Accordion' )} alertIndex="0" itemIndex="0" {...itemActions} />
+export const AccordionCloseOn = () => <AlertsItem item={object('Data', itemDateCloseOn, 'Accordion' )} alertIndex="0" itemIndex="0" {...itemActions} />
 
 const itemDataOpen = {
     ...itemData,
@@ -84,7 +84,7 @@ const itemDataOpen = {
     } 
 }
 
-export const AccordionOpenOff = () => <AccordionItem item={object('Data', itemDataOpen, 'Accordion' )} alertIndex="0" itemIndex="0" {...itemActions} />
+export const AccordionOpenOff = () => <AlertsItem item={object('Data', itemDataOpen, 'Accordion' )} alertIndex="0" itemIndex="0" {...itemActions} />
 
 const itemDataOpenOn = {
     ...itemDateCloseOn,
@@ -94,4 +94,4 @@ const itemDataOpenOn = {
     }
 }
 
-export const AccordionOpenOn = () => <AccordionItem item={object('Data', itemDataOpenOn, 'Accordion' )} alertIndex="0" itemIndex="0" {...itemActions} />
+export const AccordionOpenOn = () => <AlertsItem item={object('Data', itemDataOpenOn, 'Accordion' )} alertIndex="0" itemIndex="0" {...itemActions} />
