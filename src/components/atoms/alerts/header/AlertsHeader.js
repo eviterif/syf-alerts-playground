@@ -1,9 +1,9 @@
 import React from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import * as faSolid from '@fortawesome/free-solid-svg-icons';
-import {AccordionHeaderWrapper} from './AccordionHeaderStyles';
+import {AccordionHeaderWrapper} from './AlertsHeaderStyles';
 
-export default function AccordionHeader({isVisible, isNotificationON, title, input, icons, alertIndex, itemIndex, clickHandler, communicationMethodClick}){
+export default function AlertsHeader({isExpanded, isNotificationON, title, input, icons, alertIndex, itemIndex, expandAccordionHandler, communicationMethodClick}){
     let header_tittle = title;
     let dollar_pattern =  /(?:%s)/;
     let date_pattern = /(?:%d)/;
@@ -25,7 +25,7 @@ export default function AccordionHeader({isVisible, isNotificationON, title, inp
     }
 
     return (
-        <AccordionHeaderWrapper isExpanded={isVisible} isON={ isNotificationON ? true : false }>
+        <AccordionHeaderWrapper isExpanded={isExpanded} isON={ isNotificationON ? true : false }>
             <div className="accordionHeaderLeft">
                 <span>
                     {header_tittle} 
@@ -44,11 +44,11 @@ export default function AccordionHeader({isVisible, isNotificationON, title, inp
             </div>
             <div className="accordionHeaderRight">
                 <span>{ isNotificationON ? "ON" : "OFF" }</span>
-                <span className="caretDown" onClick={ () => clickHandler(alertIndex, itemIndex) } >
+                <span className="caretDown" onClick={ () => expandAccordionHandler() } >
                     <FontAwesomeIcon 
                         className="fontAwesomeIcon" 
                         icon={faSolid["faCaretDown"]} 
-                        transform={{ rotate: isVisible? 180 : 0 }}/>
+                        transform={{ rotate: isExpanded? 180 : 0 }}/>
                 </span>
             </div>
         </AccordionHeaderWrapper>

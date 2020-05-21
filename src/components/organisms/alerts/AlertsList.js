@@ -1,10 +1,10 @@
 import React, {useReducer, useCallback} from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import * as faSolid from '@fortawesome/free-solid-svg-icons';
-import initialState from "./Accordion.Data";
+import initialState from "./Alerts.Data";
 
-import AccordionItem from '../../atoms/accordion/AccordionItem';
-import {PageWrapper, SectionTitle } from './AccordionListStyles';
+import AlertItem from '../../molecules/alerts/AlertsItem';
+import {PageWrapper, SectionTitle } from './AlertsListStyles';
 
 const accordionReducer = (state, action) => {
     switch (action.type){
@@ -52,17 +52,19 @@ const accordionReducer = (state, action) => {
 }
 
 
-export default function AccordionList(){
+export default function AlertsList(){
     const [currentState, dispatch ] = useReducer(accordionReducer, initialState);
     const {alerts} = currentState;
 
-    const expandAccordion = useCallback((alertIndex, itemIndex) => {
-        if(alerts[alertIndex].items[itemIndex].body.isVisible){
-            dispatch({type: "HIDE_PANEL", alertIndex: alertIndex, itemIndex: itemIndex });
-        }else{
-            dispatch({type: "SHOW_PANEL", alertIndex: alertIndex, itemIndex: itemIndex });
-        }
-    }, [dispatch, alerts]);
+    // const expandAccordion = useCallback((alertIndex, itemIndex) => {
+    //     if(alerts[alertIndex].items[itemIndex].body.isVisible){
+    //         dispatch({type: "HIDE_PANEL", alertIndex: alertIndex, itemIndex: itemIndex });
+    //     }else{
+    //         dispatch({type: "SHOW_PANEL", alertIndex: alertIndex, itemIndex: itemIndex });
+    //     }
+    // }, [dispatch, alerts]);
+
+    const expandAccordion = useCallback( () => {}, [] )
 
     const handleButtonClick = useCallback((alertIndex, itemIndex, label) =>{
         let tmp_label = label.toLowerCase();
@@ -134,7 +136,7 @@ export default function AccordionList(){
                         </SectionTitle>
                         {obj.items.map( (item, itemIndex) => {
                             return (
-                                <AccordionItem 
+                                <AlertItem 
                                     key={itemIndex}
                                     item={item}
                                     alertIndex={alertIndex}

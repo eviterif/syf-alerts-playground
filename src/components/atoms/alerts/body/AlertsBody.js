@@ -1,11 +1,20 @@
 import React from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import * as faSolid from '@fortawesome/free-solid-svg-icons';
-import {AccordionBodyWrapper, Input, AccordionBodyRightIconWrapper, Button } from './AccordionBodyStyles';
+import {AccordionBodyWrapper, Input, AccordionBodyRightIconWrapper, Button } from './AlertsBodyStyles';
 
-export default function AccordionBody({item, alertIndex, itemIndex, inputChangeHandler, buttonClickHandler, communicationMethodClick}){
+export default function AlertsBody({
+    item, 
+    isExpanded, 
+    alertIndex, 
+    itemIndex, 
+    inputChangeHandler, 
+    buttonClickHandler, 
+    expandAccordionHandler,
+    communicationMethodClick
+}){
     return (
-        <AccordionBodyWrapper isExpanded={item.body.isVisible} >
+        <AccordionBodyWrapper isExpanded={isExpanded} >
             <div className="accordionBodyInnerWrapper">
                 <div className="accordionBody-left">
                     <div className="accordionBody-subtitle">{item.body.leftSection.subtitle}</div>
@@ -58,7 +67,7 @@ export default function AccordionBody({item, alertIndex, itemIndex, inputChangeH
                             </div>
                     </div>
                     <div className="accordionBody-right-bottom">
-                        <Button buttonType="secondary" onClick={ () => buttonClickHandler(alertIndex, itemIndex, "CLOSE") } >
+                        <Button buttonType="secondary" onClick={ () => expandAccordionHandler() } >
                             CLOSE
                         </Button>
                         <Button 

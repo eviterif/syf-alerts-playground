@@ -1,9 +1,9 @@
-import React from "react";
+import React, {useCallback, useState} from "react";
 import {number, func, object} from 'prop-types';
 import styled from "styled-components";
 
-import AccordionHeader from './AccordionHeader';
-import AccordionBody from './AccordionBody';
+import AlertsHeader from '../../atoms/alerts/header/AlertsHeader';
+import AlertsBody from '../../atoms/alerts/body/AlertsBody';
 
 const AccordionWrapper = styled.div`
     width: 98%;
@@ -14,46 +14,56 @@ const AccordionWrapper = styled.div`
     background-color: white;
 `;
 
-export default function AccordionItem({
+export default function AlertItem({
     item,
     alertIndex, 
-    itemIndex, 
-    clickHandler, 
+    itemIndex,  
     communicationMethodClick,
     buttonClickHandler,
     inputChangeHandler 
 }){
+    const [showPanel, setShowPanel ] = useState(false)
+
+    const expandAccordion = useCallback( () => {
+        setShowPanel(!showPanel);
+    },[showPanel, setShowPanel] )
+
     return (
         <AccordionWrapper >
-            <AccordionHeader 
-                isVisible={item.body.isVisible}
-                isNotificationON={item.header.isOn ? true : false}
+            <AlertsHeader 
+                isExpanded={showPanel}
                 title={item.header.title}
                 input={item.body.leftSection.input}
                 icons={item.icons}
                 alertIndex={alertIndex}
                 itemIndex={itemIndex}
-                clickHandler={clickHandler}
+                expandAccordionHandler={expandAccordion}
+
+                isNotificationON={item.header.isOn ? true : false}
                 communicationMethodClick={communicationMethodClick}
             />
-            <AccordionBody 
+            <AlertsBody 
                 item={item}
+                isExpanded={showPanel}
                 alertIndex={alertIndex}
                 itemIndex={itemIndex}
+                expandAccordionHandler={expandAccordion}
+
                 buttonClickHandler={buttonClickHandler}
                 inputChangeHandler={inputChangeHandler}
                 communicationMethodClick={communicationMethodClick}
+                
             />
         </AccordionWrapper>
     )
 }
 
-AccordionItem.propTypes = {
-    item: object,
-    alertIndex: number, 
-    itemIndex: number,
-    clickHandler: func, 
-    communicationMethodClick: func,
-    buttonClickHandler: func,
-    inputChangeHandler: func 
-}
+// AccordionItem.propTypes = {
+//     item: object,
+//     alertIndex: number, 
+//     itemIndex: number,
+//     clickHandler: func, 
+//     communicationMethodClick: func,
+//     buttonClickHandler: func,
+//     inputChangeHandler: func 
+// }

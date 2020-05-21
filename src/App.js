@@ -1,10 +1,10 @@
 import React from 'react';
 import './App.css';
-import AccordionList from './components/molecules/accordion/AccordionList';
+import AlertsList from './components/organisms/alerts/AlertsList';
 
 function App() {
   return (
-    <AccordionList />
+    <AlertsList />
   );
 }
 
