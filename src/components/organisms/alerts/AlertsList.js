@@ -13,6 +13,7 @@ import {
 
 import SectionTitle from '../../atoms/alerts/sectionTitle/SectionTitle'
 import AlertItem from '../../molecules/alerts/AlertsItem';
+import Loading from '../../atoms/alerts/loading/Loading';
 import {PageWrapper} from './AlertsListStyles';
 
 const AlertsList = ({
@@ -99,7 +100,7 @@ const AlertsList = ({
     }
 
     if(alerts.length <= 0 ){
-        return <p>Loading...</p>
+        return <Loading />
     }
 
     return (
