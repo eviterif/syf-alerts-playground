@@ -2,7 +2,10 @@ import React from "react";
 import { number, func, object, bool} from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import * as faSolid from '@fortawesome/free-solid-svg-icons';
-import {AccordionBodyWrapper, Input, AccordionBodyRightIconWrapper, Button } from './AlertsBodyStyles';
+import {AccordionBodyWrapper, Input, AccordionBodyRightIconWrapper } from './AlertsBodyStyles';
+
+import AlertButton from '../button/AlertButton';
+//Button
 
 export default function AlertsBody({
     item, 
@@ -68,18 +71,12 @@ export default function AlertsBody({
                             </div>
                     </div>
                     <div className="accordionBody-right-bottom">
-                        <Button buttonType="secondary" onClick={ () => expandAccordionHandler() } >
-                            CLOSE
-                        </Button>
-                        <Button 
-                            buttonType="primary" 
-                            onClick={ () => buttonClickHandler(
-                                                alertIndex, 
-                                                itemIndex, 
-                                                item.header.isOn ? "TURN OFF" : "TURN ON"
-                        )} >
-                                {item.header.isOn ? "TURN OFF" : "TURN ON"}
-                        </Button>
+                        <AlertButton type="secondary" onClickHandler={expandAccordionHandler} > CLOSE </AlertButton>
+                        <AlertButton 
+                            type="primary" 
+                            onClickHandler={() => buttonClickHandler(alertIndex, itemIndex, item.header.isOn ? "TURN OFF" : "TURN ON")} >  
+                                {item.header.isOn ? "TURN OFF" : "TURN ON"}  
+                        </AlertButton>
                     </div>
                 </div> 
             </div>
