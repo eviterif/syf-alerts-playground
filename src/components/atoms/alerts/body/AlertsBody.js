@@ -2,10 +2,10 @@ import React from "react";
 import { number, func, object, bool} from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import * as faSolid from '@fortawesome/free-solid-svg-icons';
-import {AccordionBodyWrapper, Input, AccordionBodyRightIconWrapper } from './AlertsBodyStyles';
+import {AccordionBodyWrapper, AccordionBodyRightIconWrapper } from './AlertsBodyStyles';
 
 import AlertButton from '../button/AlertButton';
-//Button
+import InputField from '../inputField/inputField';
 
 export default function AlertsBody({
     item, 
@@ -26,23 +26,16 @@ export default function AlertsBody({
                         <div>{item.body.leftSection.title}</div>
                         { 
                             item.body.leftSection.input && 
-                                <div>
-                                    {
-                                        item.body.leftSection.input.inputIcon !== '' &&
-                                        <FontAwesomeIcon 
-                                            className="dollarSignIcon" 
-                                            icon={faSolid[item.body.leftSection.input.inputIcon]}/>
-                                    }
-                                    
-                                    <Input 
-                                        type={item.body.leftSection.input.inputType}
-                                        value={item.body.leftSection.input.inputValue}
-                                        onChange={ (e) => { inputChangeHandler(alertIndex, itemIndex, e.currentTarget.value) }}
-                                        placeholder={item.body.leftSection.input.inputPlaceholder} 
-                                        hasErrors={ item.body.leftSection.input.inputError !== '' ? true : false } 
-                                        hasIcon={item.body.leftSection.input.inputIcon !== '' ? true : false } />
-                                    <div className="errorMessage">{item.body.leftSection.input.inputError}</div>
-                                </div> 
+                                <InputField 
+                                    iconName={item.body.leftSection.input.inputIcon}
+                                    inputType={item.body.leftSection.input.inputType} 
+                                    inputValue={item.body.leftSection.input.inputValue}
+                                    changeHandler={(e) => { inputChangeHandler(alertIndex, itemIndex, e.currentTarget.value) }}
+                                    inputPlaceHolder={item.body.leftSection.input.inputPlaceholder} 
+                                    hasErrors={ item.body.leftSection.input.inputError !== '' ? true : false } 
+                                    hasIcon={item.body.leftSection.input.inputIcon !== '' ? true : false }
+                                    errorMessage={item.body.leftSection.input.inputError}
+                                />
                         }
                         { 
                             item.body.leftSection.tag &&

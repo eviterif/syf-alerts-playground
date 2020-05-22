@@ -43,13 +43,13 @@ const itemData = {
 };
 
 const itemActions = {
-    clickHandler: action('expand accordion'),
+    clickHandler: action('expand alert'),
     communicationMethodClick: action('cumminication icon click'),
     buttonClickHandler: action('action buttons click'),
     inputChangeHandler: action('input change event')
 }
 
-export const Default = () => <AlertsItem item={object('Data', itemData, 'Accordion' )} alertIndex="0" itemIndex="0" {...itemActions} />
+export const Default = () => <AlertsItem item={object('Data', itemData, 'Alert' )} alertIndex="0" itemIndex="0" {...itemActions} />
 
 const itemDateCloseOn = {
     ...itemData,
@@ -74,7 +74,7 @@ const itemDateCloseOn = {
     }
 }
 
-export const AccordionCloseOn = () => <AlertsItem item={object('Data', itemDateCloseOn, 'Accordion' )} alertIndex="0" itemIndex="0" {...itemActions} />
+export const AlertCloseOn = () => <AlertsItem item={object('Data', itemDateCloseOn, 'Alert' )} alertIndex="0" itemIndex="0" {...itemActions} />
 
 const itemDataOpen = {
     ...itemData,
@@ -84,7 +84,7 @@ const itemDataOpen = {
     } 
 }
 
-export const AccordionOpenOff = () => <AlertsItem item={object('Data', itemDataOpen, 'Accordion' )} alertIndex="0" itemIndex="0" {...itemActions} />
+export const AlertOpenOff = () => <AlertsItem item={object('Data', itemDataOpen, 'Alert' )} alertIndex="0" itemIndex="0" {...itemActions} />
 
 const itemDataOpenOn = {
     ...itemDateCloseOn,
@@ -94,4 +94,4 @@ const itemDataOpenOn = {
     }
 }
 
-export const AccordionOpenOn = () => <AlertsItem item={object('Data', itemDataOpenOn, 'Accordion' )} alertIndex="0" itemIndex="0" {...itemActions} />
+export const AlertOpenOn = () => <AlertsItem item={object('Data', itemDataOpenOn, 'Alert' )} alertIndex="0" itemIndex="0" {...itemActions} />

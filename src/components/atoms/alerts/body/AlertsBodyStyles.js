@@ -14,21 +14,6 @@ export const AccordionBodyWrapper = styled.div`
         font-size: 12px;
         margin-bottom: 10px;
     }
-    .accordionBody-amount-wrapper{
-        position: relative;
-        .dollarSignIcon{
-            position: absolute;
-            top: 31px;
-            left: 11px;
-            font-size: 20px;
-            color: #d7d7d7;
-        }
-        .errorMessage{
-            font-size: 12px;
-            color: red;
-            font-style: italic;
-        }
-    }
     .accordionBody-right-icon-wrapper{
         display: flex;
     }
@@ -63,17 +48,6 @@ export const AccordionBodyWrapper = styled.div`
     }
 `;
 
-export const Input = styled.input`
-    padding: ${ ({hasIcon}) => hasIcon ? "10px 10px 10px 30px" : "10px" };
-    border-radius: 5px;
-    border-style: solid;
-    width: 82%;
-    border: ${ ({hasErrors}) => hasErrors ? "1px solid red" : "1px solid black"} ;
-    @media screen and (max-width: 500px){
-        width: 100%;
-    }
-`;
-
 export const AccordionBodyRightIconWrapper = styled.div`
     display: flex;
     flex-direction: column;
@@ -99,20 +73,5 @@ export const AccordionBodyRightIconWrapper = styled.div`
     }
     &:last-child{
         margin-right: 0;
-    }
-`;
-
-export const Button = styled.button`
-    background-color: ${({buttonType}) => buttonType === "primary" ? "#33657f" : "inherit" };
-    font-size: 20px;
-    color: ${({buttonType}) => buttonType === "primary" ? "white" : "#33657f" } ;
-    width: 128px;
-    padding: 10px 5px;
-    border-radius: 5px;
-    border: ${({buttonType}) => buttonType !== "primary" && "none" } ;
-    cursor: pointer;
-
-    @media screen and (max-width: 767px){
-        font-size: 16px;
     }
 `;
