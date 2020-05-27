@@ -2,7 +2,7 @@ import React from "react"
 import styled from "styled-components";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import * as faSolid from '@fortawesome/free-solid-svg-icons';
-import { string, number, func, bool} from 'prop-types';
+import { string, func, bool} from 'prop-types';
 
 const InputFieldWrapper = styled.div`
     position: relative;
@@ -29,7 +29,7 @@ const Input = styled.input`
 const ErrorMessage = styled.div`
     font-size: 12px;
     color: red;
-    font-style: italic;
+    margin-top: 5px;
 `
 
 export default function InputField({iconName, inputType, inputValue, changeHandler, inputPlaceHolder, hasErrors, hasIcon, errorMessage}){
@@ -48,7 +48,8 @@ export default function InputField({iconName, inputType, inputValue, changeHandl
                 placeholder={inputPlaceHolder} 
                 hasErrors={hasErrors } 
                 hasIcon={hasIcon} />
-            <ErrorMessage>{errorMessage}</ErrorMessage>
+            {errorMessage !== '' && <ErrorMessage><FontAwesomeIcon icon={faSolid["faExclamationCircle"]}/> {errorMessage}</ErrorMessage>}
+            
         </InputFieldWrapper> 
     )
 }
@@ -56,9 +57,9 @@ export default function InputField({iconName, inputType, inputValue, changeHandl
 InputField.propTypes = {
     iconName: string, 
     inputType: string, 
-    inputValue: number, 
+    inputValue: string, 
     changeHandler: func, 
-    inputPlaceHolder: func, 
+    inputPlaceHolder: string, 
     hasErrors: bool, 
     hasIcon:bool, 
     errorMessage: string

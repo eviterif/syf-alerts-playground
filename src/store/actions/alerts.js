@@ -4,7 +4,9 @@ export const GET_ALERTS_DATA = 'GET_ALERTS_DATA';
 export const UPDATE_INPUT_VALUE = 'UPDATE_INPUT_VALUE';
 export const SET_ERROR_MESSAGE = 'SET_ERROR_MESSAGE';
 export const SET_COMMUNICATION_METHOD = 'SET_COMMUNICATION_METHOD';
+export const SET_COMMUNICATION_ERROR = 'SET_COMMUNICATION_ERROR';
 export const UNSET_COMMUNICATION_METHOD = 'UNSET_COMMUNICATION_METHOD';
+export const UNSET_COMMUNICATION_ERROR = 'UNSET_COMMUNICATION_ERROR';
 export const TURN_NOTIFICATION_ON = 'TURN_NOTIFICATION_ON';
 export const TURN_NOTIFICATION_OFF = 'TURN_NOTIFICATION_OFF';
 
@@ -55,12 +57,29 @@ export const setCommunicationMethod = (alertIndex, itemIndex, iconIndex) => {
     }
 }
 
+export const setCommunicationError = (alertIndex, itemIndex, errorMessage) => {
+    return {
+        type: SET_COMMUNICATION_ERROR, 
+        alertIndex, 
+        itemIndex, 
+        errorMessage
+    }
+}
+
 export const unSetCommunicationMethod = (alertIndex, itemIndex, iconIndex) => {
     return {
         type: UNSET_COMMUNICATION_METHOD, 
         alertIndex, 
         itemIndex, 
         iconIndex
+    }
+}
+
+export const unSetCommunicationError = (alertIndex, itemIndex) => {
+    return {
+        type: UNSET_COMMUNICATION_ERROR, 
+        alertIndex, 
+        itemIndex 
     }
 }
 

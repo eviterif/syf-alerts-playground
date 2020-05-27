@@ -11,12 +11,12 @@ const initialState = {
                         {label: "Text", name:"faComment", isOn: false},
                         {label: "App", name:"faBell", isOn: false}
                     ],
+                    iconError: "Please select a delivery method.",
                     header: {
                         title: "Transaction is over %s",
                         isOn: false
                     },
                     body: {
-                        isVisible: false,
                         leftSection: { 
                             subtitle: "Send alert when:",
                             title: "A transaction occurs that is over:", 
@@ -27,8 +27,6 @@ const initialState = {
                                 inputValue: "",
                                 inputError: ""
                             }
-                                
-                            
                         },
                         rightSection: {
                             subtitle: "Select where to send alert:",
@@ -41,12 +39,12 @@ const initialState = {
                         {label: "Text", name:"faComment", isOn: false},
                         {label: "App", name:"faBell", isOn: false}
                     ],
+                    iconError: "",
                     header: {
                         title: "Credit or refund is posted",
                         isOn: false
                     },
-                    body: {
-                        isVisible: false,
+                    body: {                     
                         leftSection: { 
                             subtitle: "Send alert when:",
                             title: "A merchant credit or refund is posted to this account"
@@ -62,12 +60,12 @@ const initialState = {
                         {label: "Text", name:"faComment", isOn: false},
                         {label: "App", name:"faBell", isOn: false}
                     ],
+                    iconError: "",
                     header: {
                         title: "International transaction occurs",
                         isOn: false
                     },
-                    body: {
-                        isVisible: false,
+                    body: {                      
                         leftSection: { 
                             subtitle: "Send alert when:",
                             title: "An International transaction occurs on this account."
@@ -83,12 +81,12 @@ const initialState = {
                         {label: "Text", name:"faComment", isOn: false},
                         {label: "App", name:"faBell", isOn: false}
                     ],
+                    iconError: "",
                     header: {
                         title: "Online, phone, or mail transaction occurs",
                         isOn: false
                     },
-                    body: {
-                        isVisible: false,
+                    body: {                  
                         leftSection: { 
                             subtitle: "Send alert when:",
                             title: "An online, phone, or mail transaction occurs."
@@ -112,12 +110,12 @@ const initialState = {
                         {label: "Text", name:"faComment", isOn: false},
                         {label: "App", name:"faBell", isOn: false}
                     ],
+                    iconError: "",
                     header: {
                         title: "Balance exceeds %s ",
                         isOn: false
                     },
-                    body: {
-                        isVisible: false,
+                    body: {                        
                         leftSection: { 
                             subtitle: "Send alert when:",
                             title: "The balance on this account exceeds", 
@@ -140,12 +138,12 @@ const initialState = {
                         {label: "Text", name:"faComment", isOn: false},
                         {label: "App", name:"faBell", isOn: false}
                     ],
+                    iconError: "",
                     header: {
                         title: "Available to spend is within %s of credit limit ",
                         isOn: false
                     },
-                    body: {
-                        isVisible: false,
+                    body: {                      
                         leftSection: { 
                             subtitle: "Send alert when:",
                             title: "Available to spend is within this amount of the credit limit",
@@ -176,12 +174,12 @@ const initialState = {
                         {label: "Text", name:"faComment", isOn: false},
                         {label: "App", name:"faBell", isOn: false}
                     ],
+                    iconError: "",
                     header: {
                         title: "Payment is scheduled",
                         isOn: false
                     },
-                    body: {
-                        isVisible: false,
+                    body: {                     
                         leftSection: { 
                             subtitle: "Send alert when:",
                             title: "A payment is scheduled to be made on this account.", 
@@ -198,12 +196,12 @@ const initialState = {
                         {label: "Text", name:"faComment", isOn: false},
                         {label: "App", name:"faBell", isOn: false}
                     ],
+                    iconError: "",
                     header: {
                         title: "Payment is due in %d days ",
                         isOn: false
                     },
-                    body: {
-                        isVisible: false,
+                    body: {                       
                         leftSection: { 
                             subtitle: "Send alert when:",
                             title: "A payment is due in",
@@ -226,12 +224,12 @@ const initialState = {
                         {label: "Text", name:"faComment", isOn: false},
                         {label: "App", name:"faBell", isOn: false}
                     ],
+                    iconError: "",
                     header: {
                         title: "Promotional purchase will expire in %d days ",
                         isOn: false
                     },
-                    body: {
-                        isVisible: false,
+                    body: {               
                         leftSection: { 
                             subtitle: "Send alert when:",
                             title: "The expiration date of my promotional purchase is in: ",
@@ -254,12 +252,12 @@ const initialState = {
                         {label: "Text", name:"faComment", isOn: false},
                         {label: "App", name:"faBell", isOn: false}
                     ],
+                    iconError: "",
                     header: {
                         title: "Account is past due",
                         isOn: false
                     },
-                    body: {
-                        isVisible: false,
+                    body: {        
                         leftSection: { 
                             subtitle: "Send alert when:",
                             title: "A payment is past due",

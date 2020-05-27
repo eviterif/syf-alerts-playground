@@ -1,5 +1,5 @@
 import React from 'react';
-import { element, func, string} from 'prop-types';
+import { func, string, node} from 'prop-types';
 import styled from "styled-components";
 
 
@@ -27,7 +27,7 @@ export default function AlertButton({children, type, onClickHandler}){
 } 
 
 AlertButton.propTypes = {
-    children: element.isRequired,
+    children: node.isRequired,
     type: string, 
     onClickHandler: func
 }

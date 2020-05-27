@@ -3,7 +3,9 @@ import {
     UPDATE_INPUT_VALUE,
     SET_ERROR_MESSAGE,
     SET_COMMUNICATION_METHOD,
+    SET_COMMUNICATION_ERROR,
     UNSET_COMMUNICATION_METHOD,
+    UNSET_COMMUNICATION_ERROR,
     TURN_NOTIFICATION_ON,
     TURN_NOTIFICATION_OFF
 } from '../actions/alerts';
@@ -51,11 +53,19 @@ const alertsReducer = (state = initialState, action) => {
         case SET_COMMUNICATION_METHOD: 
             let tmp_communication_method_state = deepCopyFunction(state);
                 tmp_communication_method_state.alerts[action.alertIndex].items[action.itemIndex].icons[action.iconIndex].isOn = true;
-            return  tmp_communication_method_state
+            return  tmp_communication_method_state;
+        case SET_COMMUNICATION_ERROR: 
+            let tmp_communication_error = deepCopyFunction(state);
+                tmp_communication_error.alerts[action.alertIndex].items[action.itemIndex].iconError = action.errorMessage;
+                return tmp_communication_error;
         case UNSET_COMMUNICATION_METHOD:
             let tmp_communication_unset_method_state = deepCopyFunction(state);
                 tmp_communication_unset_method_state.alerts[action.alertIndex].items[action.itemIndex].icons[action.iconIndex].isOn = false;
-            return tmp_communication_unset_method_state
+            return tmp_communication_unset_method_state;
+        case UNSET_COMMUNICATION_ERROR: 
+            let tmp_unset_communication_error = deepCopyFunction(state);
+                tmp_unset_communication_error.alerts[action.alertIndex].items[action.itemIndex].iconError = "";
+                return tmp_unset_communication_error;
         case TURN_NOTIFICATION_ON:
             let tmp_state_turn_on = deepCopyFunction(state);
                 tmp_state_turn_on.alerts[action.alertIndex].items[action.itemIndex].header.isOn = true;

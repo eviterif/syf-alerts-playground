@@ -1,5 +1,5 @@
 import React from "react";
-import {string, number, func, object, array, bool} from 'prop-types';
+import {string, func, object, array, bool} from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import * as faSolid from '@fortawesome/free-solid-svg-icons';
 import {AccordionHeaderWrapper} from './AlertsHeaderStyles';
@@ -10,10 +10,7 @@ export default function AlertsHeader({
     title, 
     input, 
     icons, 
-    alertIndex, 
-    itemIndex, 
     expandAccordionHandler, 
-    communicationMethodClick
 }){
     let header_tittle = title;
     let dollar_pattern =  /(?:%s)/;
@@ -43,9 +40,9 @@ export default function AlertsHeader({
                 </span>
                 <div className="iconsWrapper">
                     {icons.map( (icon, iconIndex) => (
-                        <span key={iconIndex} onClick={ () => communicationMethodClick(alertIndex, itemIndex, iconIndex) }> 
+                        <span key={iconIndex}> 
                             <FontAwesomeIcon 
-                                className="fontAwesomeIcon" 
+                                
                                 icon={faSolid[icon.name]} 
                                 color={icon.isOn ? "#307ab0" : "#d7d7d7"} /> 
                         </span>
@@ -72,8 +69,5 @@ AlertsHeader.propTypes = {
     title: string, 
     input: object, 
     icons: array, 
-    alertIndex: number, 
-    itemIndex: number, 
-    expandAccordionHandler: func, 
-    communicationMethodClick: func
+    expandAccordionHandler: func
 }

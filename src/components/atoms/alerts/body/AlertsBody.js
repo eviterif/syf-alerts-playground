@@ -2,7 +2,7 @@ import React from "react";
 import { number, func, object, bool} from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import * as faSolid from '@fortawesome/free-solid-svg-icons';
-import {AccordionBodyWrapper, AccordionBodyRightIconWrapper } from './AlertsBodyStyles';
+import {AccordionBodyWrapper, AccordionBodyRightIconWrapper, IconWrapper, ErrorMessage } from './AlertsBodyStyles';
 
 import AlertButton from '../button/AlertButton';
 import InputField from '../inputField/inputField';
@@ -50,25 +50,41 @@ export default function AlertsBody({
                             <div className="accordionBody-right-icon-wrapper">
                                 {
                                     item.icons.map( (icon, iconIndex) => (
-                                        <AccordionBodyRightIconWrapper key={iconIndex} onClick={ () => communicationMethodClick(alertIndex, itemIndex, iconIndex) }>
-                                            <span className="accordionBody-right-icon-item-title">{icon.label}</span>
-                                            <span className="accordionBody-right-icon-item-icon">
-                                                <FontAwesomeIcon 
-                                                    className="fontAwesomeIcon" 
-                                                    icon={faSolid[icon.name]} 
-                                                    color={icon.isOn ? "#307ab0" : "#d7d7d7"} /> 
-                                            </span>
+                                        <AccordionBodyRightIconWrapper 
+                                            key={iconIndex} 
+                                            onClick={ () => communicationMethodClick(alertIndex, itemIndex, iconIndex) }
+                                            isSelected={icon.isOn ? true : false}
+                                        >
+                                                <span className="accordionBody-right-icon-item-title">{icon.label}</span>
+                                                <IconWrapper isSelected={icon.isOn ? true : false} hasErrors={item.iconError !== '' ? true : false}>
+                                                    <FontAwesomeIcon 
+                                                        className="fontAwesomeIcon" 
+                                                        icon={faSolid[icon.name]} 
+                                                        color={icon.isOn ? "white" : "#d7d7d7"} /> 
+                                                </IconWrapper>
                                         </AccordionBodyRightIconWrapper>
                                     ))
                                 }
+                                
                             </div>
+                            { item.iconError !== '' && <ErrorMessage> <FontAwesomeIcon icon={faSolid["faExclamationCircle"]}/> {item.iconError}</ErrorMessage> }
                     </div>
                     <div className="accordionBody-right-bottom">
-                        <AlertButton type="secondary" onClickHandler={expandAccordionHandler} > CLOSE </AlertButton>
+                        {   item.header.isOn  && 
+                            <AlertButton 
+                                type="secondary"  
+                                onClickHandler={() => {
+                                    buttonClickHandler(alertIndex, itemIndex, "TURN OFF");
+                                    expandAccordionHandler();
+                                }}  
+                            > 
+                                TURN OFF 
+                            </AlertButton> 
+                        }
                         <AlertButton 
                             type="primary" 
-                            onClickHandler={() => buttonClickHandler(alertIndex, itemIndex, item.header.isOn ? "TURN OFF" : "TURN ON")} >  
-                                {item.header.isOn ? "TURN OFF" : "TURN ON"}  
+                            onClickHandler={() => buttonClickHandler(alertIndex, itemIndex, item.header.isOn ? "SAVE" : "TURN ON")} >  
+                                {item.header.isOn ? "SAVE" : "TURN ON"}  
                         </AlertButton>
                     </div>
                 </div> 

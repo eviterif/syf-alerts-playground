@@ -14,6 +14,10 @@ export const AccordionBodyWrapper = styled.div`
         font-size: 12px;
         margin-bottom: 10px;
     }
+    .accordionBody-right{
+        min-width: 256px;
+        margin-top: 20px;
+    }
     .accordionBody-right-icon-wrapper{
         display: flex;
     }
@@ -60,7 +64,6 @@ export const AccordionBodyRightIconWrapper = styled.div`
         text-align: center;
     }
     .accordionBody-right-icon-item-icon{
-        background-color: #f2f2f2;
         color: #aaaaaa;
         border-radius: 28px;
         width: 45px;
@@ -74,4 +77,24 @@ export const AccordionBodyRightIconWrapper = styled.div`
     &:last-child{
         margin-right: 0;
     }
+`;
+
+export const IconWrapper = styled.div`
+    background-color: ${({isSelected}) => isSelected ? "#307ab0" : "#f2f2f2"};
+    color: #aaaaaa;
+    border-radius: 28px;
+    width: 45px;
+    height: 45px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border: ${({hasErrors}) => hasErrors ? "1px solid red" : "none" };
+`;
+
+export const ErrorMessage = styled.div`
+    font-size: 12px;
+    color: red;
+    margin-top: 5px;
 `;
