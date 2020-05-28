@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from "styled-components";
+import {string} from 'prop-types';
 
-const LoadingWrapper = styled.div`
+export const LoadingWrapper = styled.div`
   text-align: center;
 
   .lds-ellipsis {
@@ -16,7 +17,7 @@ const LoadingWrapper = styled.div`
     width: 13px;
     height: 13px;
     border-radius: 50%;
-    background: #307ab0;
+    background: ${({type}) => type === 'primary' ? 'white' : '#307ab0'};
     animation-timing-function: cubic-bezier(0, 1, 1, 0);
   }
   .lds-ellipsis div:nth-child(1) {
@@ -61,12 +62,48 @@ const LoadingWrapper = styled.div`
   }
 `;
 
+const InlineLoadingWrapper = styled(LoadingWrapper)`
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  left: 0;
+    .lds-ellipsis {
+      display: inline-block;
+      position: relative;
+      width: 49%;
+      height: 10px;
+      margin: auto;
+    }
+    .lds-ellipsis div {
+      position: absolute;
+      top: 0;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      animation-timing-function: cubic-bezier(0, 1, 1, 0);
+    }
+`;
 
-export default function Loading(){
-    return(
-        <LoadingWrapper>
-             <div className="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
-        </LoadingWrapper>
-       
-    )
+
+export default function Loading({display, type}){
+    switch(display){
+      case 'inline':
+        return(
+          <InlineLoadingWrapper type={type}>
+               <div className="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+          </InlineLoadingWrapper>
+        )
+      default:
+        return(
+          <LoadingWrapper type={type}>
+               <div className="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+          </LoadingWrapper>
+         )
+    }
+    
 } 
+
+Loading.propTypes = {
+  display: string, 
+  type: string
+}

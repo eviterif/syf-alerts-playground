@@ -5,8 +5,10 @@ export const UPDATE_INPUT_VALUE = 'UPDATE_INPUT_VALUE';
 export const SET_ERROR_MESSAGE = 'SET_ERROR_MESSAGE';
 export const SET_COMMUNICATION_METHOD = 'SET_COMMUNICATION_METHOD';
 export const SET_COMMUNICATION_ERROR = 'SET_COMMUNICATION_ERROR';
+export const SET_ITEM_ISLOADING = 'SET_ITEM_ISLOADING';
 export const UNSET_COMMUNICATION_METHOD = 'UNSET_COMMUNICATION_METHOD';
 export const UNSET_COMMUNICATION_ERROR = 'UNSET_COMMUNICATION_ERROR';
+export const UNSET_ITEM_ISLOADING = 'UNSET_ITEM_ISLOADING';
 export const TURN_NOTIFICATION_ON = 'TURN_NOTIFICATION_ON';
 export const TURN_NOTIFICATION_OFF = 'TURN_NOTIFICATION_OFF';
 
@@ -84,17 +86,47 @@ export const unSetCommunicationError = (alertIndex, itemIndex) => {
 }
 
 export const turnNotificationOn = ( alertIndex, itemIndex ) =>{
-    return {
-        type: TURN_NOTIFICATION_ON, 
-        alertIndex, 
-        itemIndex
+    return async dispatch => {
+        dispatch({ type: SET_ITEM_ISLOADING, alertIndex, itemIndex});
+            try {
+                //Simulating Ajax Request
+                let promise = new Promise((resolve, reject ) => {
+                    setTimeout(() => resolve(initialState.alerts), 3000)
+                })
+
+                let response = await promise;
+
+                dispatch({
+                    type: TURN_NOTIFICATION_ON, 
+                    alertIndex, 
+                    itemIndex
+                })
+            }catch(error){
+                console.log(error);
+            }
+        dispatch({ type: UNSET_ITEM_ISLOADING, alertIndex, itemIndex});
     }
 }
 
 export const turnNotificationOff = ( alertIndex, itemIndex ) =>{
-    return {
-        type: TURN_NOTIFICATION_OFF, 
-        alertIndex, 
-        itemIndex
+    return async dispatch => {
+        dispatch({ type: SET_ITEM_ISLOADING, alertIndex, itemIndex});
+            try {
+                //Simulating Ajax Request
+                let promise = new Promise((resolve, reject ) => {
+                    setTimeout(() => resolve(initialState.alerts), 3000)
+                })
+
+                let response = await promise;
+
+                dispatch({
+                    type: TURN_NOTIFICATION_OFF, 
+                    alertIndex, 
+                    itemIndex
+                })
+            }catch(error){
+                console.log(error);
+            }
+        dispatch({ type: UNSET_ITEM_ISLOADING, alertIndex, itemIndex});
     }
 }
