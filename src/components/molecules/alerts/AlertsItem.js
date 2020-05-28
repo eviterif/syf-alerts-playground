@@ -25,83 +25,12 @@ const AccordionWrapper = styled.div`
     overflow: hidden;
     background-color: white;
 `;
-export const AlertItem = ({
-    item,
-    alertIndex, 
-    itemIndex,  
-    onUpdateInputValue, 
-    onSetErrorMessage, 
-    onSetCommunicationMethod, 
-    onSetCommunicationError,
-    onUnSetCommunicationMethod, 
-    onUnSetCommunicationError,
-    onTurnNotificationOn, 
-    onTurnNotificationOff
-
-}) => {
+export const AlertItem = ({ item, alertIndex, itemIndex }) => {
     const [showPanel, setShowPanel ] = useState(false);
-    const [currentState, setCurrentState] = useState(item);
 
     const expandAccordion = useCallback( () => {
         setShowPanel(!showPanel);
     },[showPanel, setShowPanel] )
-
-    const handleCommunicationMethodClick = (alertIndex, itemIndex, iconIndex) => {
-        onUnSetCommunicationError(alertIndex, itemIndex);
-        if(item.icons[iconIndex].isOn){
-            onUnSetCommunicationMethod(alertIndex, itemIndex, iconIndex);
-        }else{
-            onSetCommunicationMethod(alertIndex, itemIndex, iconIndex);
-        }
-    }
-
-    const handleButtonClick = (alertIndex, itemIndex, label) =>{
-        let tmp_label = label.toLowerCase();
-        let communication_methods = item.icons.filter( (obj) => obj.isOn === true);
-        
-        if(tmp_label === "turn on" && item.body.leftSection.input){
-            let tmp_value = item.body.leftSection.input.inputValue;
-
-            if(tmp_value === ""){
-                onSetErrorMessage(alertIndex, itemIndex, "Please enter a valid amount.");
-            }else{
-                onSetErrorMessage(alertIndex, itemIndex, "");
-            }
-
-            if(communication_methods.length <= 0){
-               // alert("Please Select a communication method");
-               onSetCommunicationError(alertIndex, itemIndex, "Please select delivery method.");
-            }else{
-                onUnSetCommunicationError(alertIndex, itemIndex);
-            }
-
-            if(tmp_value !== "" && communication_methods.length > 0){
-                onTurnNotificationOn(alertIndex, itemIndex)
-            }
-        }
-
-        if(tmp_label === "turn on" && !item.body.leftSection.input){
-            if(communication_methods.length <= 0){
-                //alert("Please Select a communication method");
-                onSetCommunicationError(alertIndex, itemIndex, "Please select delivery method.");
-            }else{
-                onTurnNotificationOn(alertIndex, itemIndex);
-                onUnSetCommunicationError(alertIndex, itemIndex);
-            } 
-        }
-
-        if(tmp_label === "turn off"){
-            onTurnNotificationOff(alertIndex, itemIndex)
-
-            if(item.body.leftSection.input){
-                onUpdateInputValue(alertIndex, itemIndex, "");
-            }
-
-            for(let i=0; i <= item.icons.length -1; i++ ){
-                onUnSetCommunicationMethod(alertIndex, itemIndex, i);
-            }
-        }
-    }
 
     return (
         <AccordionWrapper >
@@ -118,22 +47,16 @@ export const AlertItem = ({
             <AlertsBody 
                 item={item}
                 isExpanded={showPanel}
-                currentState={currentState}
                 alertIndex={alertIndex}
                 itemIndex={itemIndex}
                 expandAccordionHandler={expandAccordion}
-                buttonClickHandler={handleButtonClick}
-                communicationMethodClick={handleCommunicationMethodClick}
-                
             />
         </AccordionWrapper>
     )
 }
 
 const mapStateToProps = state => {
-    return {
-       
-    }
+    return {}
 } 
 
 const mapDispatchToProps = dispatch => {

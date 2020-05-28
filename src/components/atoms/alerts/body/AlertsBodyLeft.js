@@ -1,6 +1,7 @@
 import React, {useCallback} from 'react';
 import {connect} from 'react-redux';
 import { updateInputValue, setErrorMessage } from "../../../../store/actions/alerts";
+import { number, object, func} from 'prop-types';
 
 import InputField from '../inputField/inputField';
 import SelectField from '../selectField/SelectField';
@@ -52,9 +53,7 @@ const AlertsBodyLeft = ({alertIndex, itemIndex, item, onUpdateInputValue, onSetE
 }
 
 const mapStateToProps = state => {
-    return {
-       
-    }
+    return {}
 } 
 
 const mapDispatchToProps = dispatch => {
@@ -64,7 +63,12 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
+AlertsBodyLeft.propTypes = {
+    alertIndex: number, 
+    itemIndex: number,
+    item: object, 
+    onUpdateInputValue: func,
+    onSetErrorMessage: func
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(AlertsBodyLeft);
-
-// changeHandler={(e) => { inputChangeHandler(alertIndex, itemIndex, e.currentTarget.value) }}

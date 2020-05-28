@@ -2,6 +2,7 @@ import React from 'react';
 import styled from "styled-components";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import * as faSolid from '@fortawesome/free-solid-svg-icons';
+import { string, bool, func} from 'prop-types';
 
 const SelectElement = styled.select`
     width: 140px;
@@ -37,4 +38,11 @@ export default function SelectField({inputValue, changeHandler, errorMessage, ha
             {errorMessage !== '' && <ErrorMessage><FontAwesomeIcon icon={faSolid["faExclamationCircle"]}/> {errorMessage}</ErrorMessage>}
         </div>
     )
+}
+
+SelectField.propTypes = {
+    inputValue: string, 
+    changeHandler: func, 
+    errorMessage: string,
+    hasErrors: bool 
 }

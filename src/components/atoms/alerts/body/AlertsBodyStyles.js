@@ -1,5 +1,14 @@
 import styled from "styled-components";
 
+export const AccordionWrapper = styled.div`
+    width: 98%;
+    margin: 0 auto 30px auto;
+    border-radius: 5px;
+    border: 1px solid lightgray;
+    overflow: hidden;
+    background-color: white;
+`;
+
 export const AccordionBodyWrapper = styled.div` 
     overflow: hidden;
     max-height: ${({isExpanded}) => isExpanded ? "400px" : "0"};
