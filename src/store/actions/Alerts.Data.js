@@ -206,7 +206,7 @@ const initialState = {
                             subtitle: "Send alert when:",
                             title: "A payment is due in",
                             input: {
-                                inputType: "number",
+                                inputType: "select",
                                 inputIcon: "",
                                 inputPlaceholder: "5 days",
                                 inputValue: "",
@@ -234,7 +234,7 @@ const initialState = {
                             subtitle: "Send alert when:",
                             title: "The expiration date of my promotional purchase is in: ",
                             input: {
-                                inputType: "number",
+                                inputType: "select",
                                 inputIcon: "",
                                 inputPlaceholder: "14 days",
                                 inputValue: "",

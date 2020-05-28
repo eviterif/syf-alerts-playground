@@ -6,6 +6,7 @@ import {AccordionBodyWrapper, AccordionBodyRightIconWrapper, IconWrapper, ErrorM
 
 import AlertButton from '../button/AlertButton';
 import InputField from '../inputField/inputField';
+import SelectField from '../selectField/SelectField';
 
 export default function AlertsBody({
     item, 
@@ -25,7 +26,7 @@ export default function AlertsBody({
                     <div className="accordionBody-amount-wrapper">
                         <div>{item.body.leftSection.title}</div>
                         { 
-                            item.body.leftSection.input && 
+                            item.body.leftSection.input && item.body.leftSection.input.inputType === 'number' &&
                                 <InputField 
                                     iconName={item.body.leftSection.input.inputIcon}
                                     inputType={item.body.leftSection.input.inputType} 
@@ -34,6 +35,15 @@ export default function AlertsBody({
                                     inputPlaceHolder={item.body.leftSection.input.inputPlaceholder} 
                                     hasErrors={ item.body.leftSection.input.inputError !== '' ? true : false } 
                                     hasIcon={item.body.leftSection.input.inputIcon !== '' ? true : false }
+                                    errorMessage={item.body.leftSection.input.inputError}
+                                />
+                        }
+                        {
+                            item.body.leftSection.input && item.body.leftSection.input.inputType === 'select' &&
+                                <SelectField 
+                                    inputValue={item.body.leftSection.input.inputValue}
+                                    changeHandler={(e) => { inputChangeHandler(alertIndex, itemIndex, e.currentTarget.value) }}
+                                    hasErrors={ item.body.leftSection.input.inputError !== '' ? true : false } 
                                     errorMessage={item.body.leftSection.input.inputError}
                                 />
                         }
