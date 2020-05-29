@@ -1,5 +1,5 @@
 import React from 'react';
-import { number, object, func} from 'prop-types';
+import { string, object, func} from 'prop-types';
 
 import InputField from '../inputField/inputField';
 import SelectField from '../selectField/SelectField';
@@ -35,11 +35,10 @@ const AlertsBodyLeft = ({ item, inputValue, onInputChange, inputError }) => {
 }
 
 AlertsBodyLeft.propTypes = {
-    alertIndex: number, 
-    itemIndex: number,
     item: object, 
-    onUpdateInputValue: func,
-    onSetErrorMessage: func
+    inputValue: string, 
+    onInputChange: func, 
+    inputError: string
 }
 
 export default AlertsBodyLeft;

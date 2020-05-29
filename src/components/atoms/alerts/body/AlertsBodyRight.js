@@ -1,14 +1,24 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import * as faSolid from '@fortawesome/free-solid-svg-icons';
-import { object, func, array} from 'prop-types';
+import { object, func, array, string, bool} from 'prop-types';
 
 import {AccordionBodyRightIconWrapper, IconWrapper, ErrorMessage } from './AlertsBodyStyles';
 
 import AlertButton from '../button/AlertButton';
 import Loading from '../loading/Loading';
 
-const AlertsBodyRight = ({ item, communicationMethodClick, onButtonClick, communicationMethods, communicationError, loading, buttonLabelClicked, inputValueHasChanged, communicationMethodsHasChanged }) => {
+const AlertsBodyRight = ({ 
+    item, 
+    communicationMethods, 
+    communicationMethodClick, 
+    communicationError,
+    communicationMethodsHasChanged,  
+    loading, 
+    inputValueHasChanged, 
+    onButtonClick,    
+    buttonLabelClicked  
+}) => {
     return (
         <div className="accordionBody-right">
             <div className="accordionBody-right-top">
@@ -67,9 +77,14 @@ const AlertsBodyRight = ({ item, communicationMethodClick, onButtonClick, commun
 
 AlertsBodyRight.propTypes = {
     item: object, 
-    communicationMethodClick: func,
-    onButtonClick: func,
     communicationMethods: array,
+    communicationMethodClick: func,
+    communicationError: string,
+    communicationMethodsHasChanged: bool,
+    loading: bool,
+    inputValueHasChanged: bool,
+    onButtonClick: func,
+    buttonLabelClicked: string,
 }
 
 export default AlertsBodyRight;
