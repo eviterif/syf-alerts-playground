@@ -3,9 +3,9 @@ import {func, array} from 'prop-types';
 import {connect} from 'react-redux';
 import { getAlertsData } from "../../../store/actions/alerts";
 
-import SectionTitle from '../../atoms/alerts/sectionTitle/SectionTitle'
-import AlertItem from '../alertItem/AlertsItem'
-;import Loading from '../../atoms/alerts/loading/Loading';
+import SectionTitle from '../../atoms/sectionTitle/SectionTitle';
+import AlertItem from '../alertItem/AlertsItem';
+import Loading from '../../atoms/loading/Loading';
 import {PageWrapper} from './AlertsListStyles';
 
 const AlertsList = ({
