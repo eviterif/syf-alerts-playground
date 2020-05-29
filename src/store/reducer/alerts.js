@@ -1,15 +1,8 @@
 import {
     GET_ALERTS_DATA,
-    UPDATE_INPUT_VALUE,
-    SET_ERROR_MESSAGE,
-    SET_COMMUNICATION_METHOD,
-    SET_COMMUNICATION_ERROR,
-    SET_ITEM_ISLOADING,
-    UNSET_COMMUNICATION_METHOD,
-    UNSET_COMMUNICATION_ERROR,
-    UNSET_ITEM_ISLOADING,
     TURN_NOTIFICATION_ON,
-    TURN_NOTIFICATION_OFF
+    TURN_NOTIFICATION_OFF,
+    SAVE_NOTIFICATION
 } from '../actions/alerts';
 
 const initialState = {
@@ -44,46 +37,48 @@ const alertsReducer = (state = initialState, action) => {
                 ...state,
                 alerts: action.data
             }
-        case UPDATE_INPUT_VALUE:
-            let temporary_state = deepCopyFunction(state);
-                temporary_state.alerts[action.alertIndex].items[action.itemIndex].body.leftSection.input.inputValue = action.value;
-            return temporary_state;
-        case SET_ERROR_MESSAGE:
-            let tmp_state_error_message = deepCopyFunction(state);
-                tmp_state_error_message.alerts[action.alertIndex].items[action.itemIndex].body.leftSection.input.inputError = action.errorMessage;
-            return tmp_state_error_message;
-        case SET_COMMUNICATION_METHOD: 
-            let tmp_communication_method_state = deepCopyFunction(state);
-                tmp_communication_method_state.alerts[action.alertIndex].items[action.itemIndex].icons[action.iconIndex].isOn = true;
-            return  tmp_communication_method_state;
-        case SET_COMMUNICATION_ERROR: 
-            let tmp_communication_error = deepCopyFunction(state);
-                tmp_communication_error.alerts[action.alertIndex].items[action.itemIndex].iconError = action.errorMessage;
-                return tmp_communication_error;
-        case SET_ITEM_ISLOADING: 
-            let tmp_item_isLoading = deepCopyFunction(state);
-            tmp_item_isLoading.alerts[action.alertIndex].items[action.itemIndex].isLoading = true;
-            return tmp_item_isLoading;
-        case UNSET_COMMUNICATION_METHOD:
-            let tmp_communication_unset_method_state = deepCopyFunction(state);
-                tmp_communication_unset_method_state.alerts[action.alertIndex].items[action.itemIndex].icons[action.iconIndex].isOn = false;
-            return tmp_communication_unset_method_state;
-        case UNSET_COMMUNICATION_ERROR: 
-            let tmp_unset_communication_error = deepCopyFunction(state);
-                tmp_unset_communication_error.alerts[action.alertIndex].items[action.itemIndex].iconError = "";
-                return tmp_unset_communication_error;
-        case UNSET_ITEM_ISLOADING: 
-            let tmp_unset_item_isLoading = deepCopyFunction(state);
-                tmp_unset_item_isLoading.alerts[action.alertIndex].items[action.itemIndex].isLoading = false;
-                return tmp_unset_item_isLoading;
         case TURN_NOTIFICATION_ON:
             let tmp_state_turn_on = deepCopyFunction(state);
-                tmp_state_turn_on.alerts[action.alertIndex].items[action.itemIndex].header.isOn = true;
+            let alertIndex = action.alertIndex;
+            let itemIndex = action.itemIndex;
+            let communicationMethods = action.communicationMethods.map( (obj) => ({...obj}) );
+
+            tmp_state_turn_on.alerts[alertIndex].items[itemIndex].header.isOn = true;  
+            tmp_state_turn_on.alerts[alertIndex].items[itemIndex].icons = communicationMethods;
+
+            if(tmp_state_turn_on.alerts[alertIndex].items[itemIndex].body.leftSection.input){
+                tmp_state_turn_on.alerts[alertIndex].items[itemIndex].body.leftSection.input.inputValue = action.inputValue;
+            }  
             return tmp_state_turn_on;
+
         case TURN_NOTIFICATION_OFF:
             let tmp_state_turn_off = deepCopyFunction(state);
-                tmp_state_turn_off.alerts[action.alertIndex].items[action.itemIndex].header.isOn = false;
+            let alertIndex_off = action.alertIndex;
+            let itemIndex_off = action.itemIndex;
+            let communicationMethods_off = action.communicationMethods.map( (obj) => ({...obj}) );
+
+            tmp_state_turn_off.alerts[alertIndex_off].items[itemIndex_off].header.isOn = false;  
+            tmp_state_turn_off.alerts[alertIndex_off].items[itemIndex_off].icons = communicationMethods_off;
+
+            if(tmp_state_turn_off.alerts[alertIndex_off].items[itemIndex_off].body.leftSection.input){
+                tmp_state_turn_off.alerts[alertIndex_off].items[itemIndex_off].body.leftSection.input.inputValue = action.inputValue;
+            }  
             return tmp_state_turn_off;
+
+        case  SAVE_NOTIFICATION:
+            let tmp_save_notification = deepCopyFunction(state);
+            let alertIndex_save = action.alertIndex;
+            let itemIndex_save = action.itemIndex;
+            let communicationMethods_save = action.communicationMethods.map( (obj) => ({...obj}) );
+
+            tmp_save_notification.alerts[alertIndex_save].items[itemIndex_save].icons = communicationMethods_save;
+
+            if(tmp_save_notification.alerts[alertIndex_save].items[itemIndex_save].body.leftSection.input){
+                tmp_save_notification.alerts[alertIndex_save].items[itemIndex_save].body.leftSection.input.inputValue = action.inputValue;
+            }  
+            return tmp_save_notification;
+
+
         default: 
             return state;
     }

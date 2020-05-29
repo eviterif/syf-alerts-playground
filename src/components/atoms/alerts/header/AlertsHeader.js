@@ -42,7 +42,6 @@ export default function AlertsHeader({
                     {icons.map( (icon, iconIndex) => (
                         <span key={iconIndex}> 
                             <FontAwesomeIcon 
-                                
                                 icon={faSolid[icon.name]} 
                                 color={icon.isOn ? "#307ab0" : "#d7d7d7"} /> 
                         </span>

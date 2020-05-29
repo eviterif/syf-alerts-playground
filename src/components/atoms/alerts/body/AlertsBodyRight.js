@@ -1,100 +1,27 @@
 import React from 'react';
-import {connect} from 'react-redux';
-import { 
-    updateInputValue, setErrorMessage, setCommunicationMethod, setCommunicationError, 
-    unSetCommunicationMethod, unSetCommunicationError, turnNotificationOn, turnNotificationOff 
-} from "../../../../store/actions/alerts";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import * as faSolid from '@fortawesome/free-solid-svg-icons';
-import { number, object, func} from 'prop-types';
+import { object, func, array} from 'prop-types';
 
 import {AccordionBodyRightIconWrapper, IconWrapper, ErrorMessage } from './AlertsBodyStyles';
 
 import AlertButton from '../button/AlertButton';
 import Loading from '../loading/Loading';
 
-const AlertsBodyRight = ({
-    alertIndex, 
-    itemIndex, 
-    item, 
-    onSetErrorMessage,
-    onSetCommunicationError,
-    onTurnNotificationOn,
-    onTurnNotificationOff,
-    onUpdateInputValue,
-    onSetCommunicationMethod, 
-    onUnSetCommunicationMethod, 
-    onUnSetCommunicationError
-}) => {
-
-    const handleCommunicationMethodClick = (iconIndex) => {
-        onUnSetCommunicationError(alertIndex, itemIndex);
-        if(item.icons[iconIndex].isOn){
-            onUnSetCommunicationMethod(alertIndex, itemIndex, iconIndex);
-        }else{
-            onSetCommunicationMethod(alertIndex, itemIndex, iconIndex);
-        }
-    }
-
-    const handleButtonClick = (label) =>{
-        let tmp_label = label.toLowerCase();
-        let communication_methods = item.icons.filter( (obj) => obj.isOn === true);
-        
-        if(tmp_label === "turn on" && item.body.leftSection.input){
-            let tmp_value = item.body.leftSection.input.inputValue;
-
-            if(tmp_value === ""){
-                onSetErrorMessage(alertIndex, itemIndex, "Please enter a valid amount.");
-            }else{
-                onSetErrorMessage(alertIndex, itemIndex, "");
-            }
-
-            if(communication_methods.length <= 0){
-               onSetCommunicationError(alertIndex, itemIndex, "Please select delivery method.");
-            }else{
-                onUnSetCommunicationError(alertIndex, itemIndex);
-            }
-
-            if(tmp_value !== "" && communication_methods.length > 0){
-                onTurnNotificationOn(alertIndex, itemIndex)
-            }
-        }
-
-        if(tmp_label === "turn on" && !item.body.leftSection.input){
-            if(communication_methods.length <= 0){
-                onSetCommunicationError(alertIndex, itemIndex, "Please select delivery method.");
-            }else{
-                onTurnNotificationOn(alertIndex, itemIndex);
-                onUnSetCommunicationError(alertIndex, itemIndex);
-            } 
-        }
-
-        if(tmp_label === "turn off"){
-            onTurnNotificationOff(alertIndex, itemIndex)
-
-            if(item.body.leftSection.input){
-                onUpdateInputValue(alertIndex, itemIndex, "");
-            }
-
-            for(let i=0; i <= item.icons.length -1; i++ ){
-                onUnSetCommunicationMethod(alertIndex, itemIndex, i);
-            }
-        }
-    }
-
+const AlertsBodyRight = ({ item, communicationMethodClick, onButtonClick, communicationMethods, communicationError, loading, buttonLabelClicked, inputValueHasChanged, communicationMethodsHasChanged }) => {
     return (
         <div className="accordionBody-right">
             <div className="accordionBody-right-top">
                 <div className="accordionBody-subtitle">{item.body.rightSection.subtitle}</div>
                     <div className="accordionBody-right-icon-wrapper">
                         {
-                            item.icons.map( (icon, iconIndex) => (
+                            communicationMethods.map( (icon, iconIndex) => (
                                 <AccordionBodyRightIconWrapper  
                                     key={iconIndex} 
-                                    onClick={ () => handleCommunicationMethodClick(iconIndex) } 
+                                    onClick={ () => communicationMethodClick(iconIndex) } 
                                     isSelected={icon.isOn ? true : false} >
                                         <span className="accordionBody-right-icon-item-title">{icon.label}</span>
-                                        <IconWrapper isSelected={icon.isOn ? true : false} hasErrors={item.iconError !== '' ? true : false}>
+                                        <IconWrapper isSelected={icon.isOn ? true : false} hasErrors={communicationError !== '' ? true : false}>
                                             <FontAwesomeIcon 
                                                 className="fontAwesomeIcon" 
                                                 icon={faSolid[icon.name]} 
@@ -102,72 +29,47 @@ const AlertsBodyRight = ({
                                         </IconWrapper>
                                 </AccordionBodyRightIconWrapper>
                             ))
-                        }
-                        
+                        }  
                     </div>
-                    { item.iconError !== '' && <ErrorMessage> <FontAwesomeIcon icon={faSolid["faExclamationCircle"]}/> {item.iconError}</ErrorMessage> }
+                    { communicationError !== '' && <ErrorMessage> <FontAwesomeIcon icon={faSolid["faExclamationCircle"]}/> {communicationError}</ErrorMessage> }
             </div>
             <div className="accordionBody-right-bottom">
                 {   item.header.isOn  && 
                     <>
-                        <AlertButton type="secondary" isLoading={item.isLoading}
-                            onClickHandler={() => {
-                                handleButtonClick("TURN OFF");
-                                //expandAccordionHandler();
-                            }}  
-                        > 
-                            TURN OFF {item.isLoading &&  <Loading display="inline" type="secondary" />}
+                        <AlertButton 
+                            type="secondary" 
+                            isLoading={loading && buttonLabelClicked === "TURN OFF" ? true : false} 
+                            onClickHandler={() => { onButtonClick("TURN OFF"); }} > 
+                                TURN OFF {loading && buttonLabelClicked === "TURN OFF" && <Loading display="inline" type="primary" />}
                         </AlertButton> 
                         
-                        <AlertButton type="primary" onClickHandler={() => { handleButtonClick("SAVE"); }} > 
-                            SAVE 
+                        <AlertButton 
+                            type="primary" 
+                            isLoading={ loading && buttonLabelClicked === "SAVE" ? true : inputValueHasChanged || communicationMethodsHasChanged ? false : true} 
+                            onClickHandler={() => { onButtonClick("SAVE"); }} > 
+                                SAVE {loading && buttonLabelClicked === "SAVE" && <Loading display="inline" type="primary" />}
                         </AlertButton> 
                     </>
                 }
                 {
                     !item.header.isOn &&
-                        <AlertButton type="primary" isLoading={item.isLoading} onClickHandler={() => { handleButtonClick("TURN ON") }} >  
-                                TURN ON {item.isLoading &&  <Loading display="inline" type="primary" />}
+                        <AlertButton 
+                            type="primary" 
+                            isLoading={loading && buttonLabelClicked === "TURN ON" ? true : false} 
+                            onClickHandler={() => { onButtonClick("TURN ON") }} >  
+                                TURN ON {loading && buttonLabelClicked === "TURN ON" && <Loading display="inline" type="primary" />} 
                         </AlertButton>
                 }
-                
             </div>
         </div> 
     )
-
-}
-
-const mapStateToProps = state => {
-    return {}
-} 
-
-const mapDispatchToProps = dispatch => {
-
-    return {
-        onSetErrorMessage: (alertIndex, itemIndex, errorMessage) => dispatch(setErrorMessage(alertIndex, itemIndex, errorMessage)),
-        onSetCommunicationError: (alertIndex, itemIndex, errorMessage) => dispatch(setCommunicationError(alertIndex, itemIndex, errorMessage)),
-        onTurnNotificationOn: (alertIndex, itemIndex) => dispatch(turnNotificationOn(alertIndex, itemIndex)),
-        onTurnNotificationOff: (alertIndex, itemIndex) => dispatch(turnNotificationOff(alertIndex, itemIndex)),
-        onUpdateInputValue: (alertIndex, itemIndex, value) => dispatch(updateInputValue(alertIndex, itemIndex, value)),
-        onSetCommunicationMethod: (alertIndex, itemIndex, iconIndex) => dispatch(setCommunicationMethod(alertIndex, itemIndex, iconIndex)),
-        onUnSetCommunicationMethod: (alertIndex, itemIndex, iconIndex) => dispatch(unSetCommunicationMethod(alertIndex, itemIndex, iconIndex)),
-        onUnSetCommunicationError: (alertIndex, itemIndex) => dispatch(unSetCommunicationError(alertIndex, itemIndex)) 
-        
-    }
 }
 
 AlertsBodyRight.propTypes = {
-    alertIndex: number, 
-    itemIndex: number,
     item: object, 
-    onSetErrorMessage: func,
-    onSetCommunicationError: func,
-    onTurnNotificationOn: func,
-    onTurnNotificationOff: func,
-    onUpdateInputValue: func,
-    onSetCommunicationMethod: func, 
-    onUnSetCommunicationMethod: func, 
-    onUnSetCommunicationError: func
+    communicationMethodClick: func,
+    onButtonClick: func,
+    communicationMethods: array,
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AlertsBodyRight);
+export default AlertsBodyRight;

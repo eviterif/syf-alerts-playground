@@ -11,7 +11,12 @@ const ButtonWrapper = styled.button`
        return  buttonType === "primary" ? "#33657f" : "inherit"
     } };
     font-size: 20px;
-    color: ${({buttonType}) => buttonType === "primary" ? "white" : "#33657f" } ;
+    color: ${({buttonType, disabled}) => {
+        if(disabled){
+            return "white";
+        }
+        return buttonType === "primary" ? "white" : "#33657f"
+    } } ;
     width: 128px;
     padding: 15px 5px;
     border-radius: 5px;
@@ -21,6 +26,9 @@ const ButtonWrapper = styled.button`
 
     @media screen and (max-width: 767px){
         font-size: 16px;
+    }
+    &:first-child{
+        margin-right: 5px;
     }
 `;
 

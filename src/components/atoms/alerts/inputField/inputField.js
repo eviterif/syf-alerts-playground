@@ -2,7 +2,7 @@ import React from "react"
 import styled from "styled-components";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import * as faSolid from '@fortawesome/free-solid-svg-icons';
-import { string, func, bool} from 'prop-types';
+import { object, func, string} from 'prop-types';
 
 const InputFieldWrapper = styled.div`
     position: relative;
@@ -32,35 +32,33 @@ const ErrorMessage = styled.div`
     margin-top: 5px;
 `
 
-export default function InputField({iconName, inputType, inputValue, changeHandler, inputPlaceHolder, hasErrors, hasIcon, errorMessage}){
+const InputField = ({ details, inputValue, inputError, onInputChange}) => {
+
     return (
         <InputFieldWrapper>
             {
-                iconName !== '' &&
+                details.inputIcon !== '' &&
                 <FontAwesomeIcon 
                     className="dollarSignIcon" 
-                    icon={faSolid[iconName]}/>
+                    icon={faSolid[details.inputIcon]}/>
             }
             <Input 
-                type={inputType}
+                type={details.inputType}
                 value={inputValue}
-                onChange={changeHandler}
-                placeholder={inputPlaceHolder} 
-                hasErrors={hasErrors } 
-                hasIcon={hasIcon} />
-            {errorMessage !== '' && <ErrorMessage><FontAwesomeIcon icon={faSolid["faExclamationCircle"]}/> {errorMessage}</ErrorMessage>}
+                onChange={onInputChange}
+                placeholder={details.inputPlaceholder} 
+                hasErrors={inputError !== '' ? true : false} 
+                hasIcon={details.inputIcon !== '' ? true : false} />
+            {inputError !== '' && <ErrorMessage><FontAwesomeIcon icon={faSolid["faExclamationCircle"]}/> {inputError}</ErrorMessage>}
             
         </InputFieldWrapper> 
     )
 }
 
 InputField.propTypes = {
-    iconName: string, 
-    inputType: string, 
-    inputValue: string, 
-    changeHandler: func, 
-    inputPlaceHolder: string, 
-    hasErrors: bool, 
-    hasIcon:bool, 
-    errorMessage: string
+    details: object,
+    inputValue: string,
+    onInputChange: func,
 }
+
+export default InputField;

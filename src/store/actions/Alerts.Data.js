@@ -6,13 +6,11 @@ const initialState = {
             sectionTitle: "SPENDING ALERTS",
             items: [
                 {   
-                    isLoading: false,
                     icons: [
                         {label: "Email", name:"faEnvelope", isOn: false},
                         {label: "Text", name:"faComment", isOn: false},
                         {label: "App", name:"faBell", isOn: false}
                     ],
-                    iconError: "",
                     header: {
                         title: "Transaction is over %s",
                         isOn: false
@@ -26,22 +24,19 @@ const initialState = {
                                 inputIcon: "faDollarSign",
                                 inputPlaceholder: "Amount",
                                 inputValue: "",
-                                inputError: ""
                             }
                         },
                         rightSection: {
                             subtitle: "Select where to send alert:",
                         }
-                    }
+                    },
                 },
                 {   
-                    isLoading: false,
                     icons: [
                         {label: "Email", name:"faEnvelope", isOn: false},
                         {label: "Text", name:"faComment", isOn: false},
                         {label: "App", name:"faBell", isOn: false}
                     ],
-                    iconError: "",
                     header: {
                         title: "Credit or refund is posted",
                         isOn: false
@@ -54,16 +49,14 @@ const initialState = {
                         rightSection: {
                             subtitle: "Select where to send alert:",
                         }
-                    }
+                    },
                 },
                 {
-                    isLoading: false,
                     icons: [
                         {label: "Email", name:"faEnvelope", isOn: false},
                         {label: "Text", name:"faComment", isOn: false},
                         {label: "App", name:"faBell", isOn: false}
                     ],
-                    iconError: "",
                     header: {
                         title: "International transaction occurs",
                         isOn: false
@@ -76,16 +69,14 @@ const initialState = {
                         rightSection: {
                             subtitle: "Select where to send alert:",
                         }
-                    }
+                    },
                 },
                 {
-                    isLoading: false,
                     icons: [
                         {label: "Email", name:"faEnvelope", isOn: false},
                         {label: "Text", name:"faComment", isOn: false},
                         {label: "App", name:"faBell", isOn: false}
                     ],
-                    iconError: "",
                     header: {
                         title: "Online, phone, or mail transaction occurs",
                         isOn: false
@@ -98,7 +89,7 @@ const initialState = {
                         rightSection: {
                             subtitle: "Select where to send alert:",
                         }
-                    }
+                    },
                 },
 
             ]
@@ -109,13 +100,11 @@ const initialState = {
             sectionTitle: "BALANCE ALERTS",
             items: [
                 {
-                    isLoading: false,
                     icons: [
                         {label: "Email", name:"faEnvelope", isOn: false},
                         {label: "Text", name:"faComment", isOn: false},
                         {label: "App", name:"faBell", isOn: false}
                     ],
-                    iconError: "",
                     header: {
                         title: "Balance exceeds %s ",
                         isOn: false
@@ -129,13 +118,12 @@ const initialState = {
                                 inputIcon: "faDollarSign",
                                 inputPlaceholder: "Amount",
                                 inputValue: "",
-                                inputError: ""
                             }
                         },
                         rightSection: {
                             subtitle: "Select where to send alert:",
                         }
-                    }
+                    },
                 },
                 {
                     isLoading: false,
@@ -144,7 +132,6 @@ const initialState = {
                         {label: "Text", name:"faComment", isOn: false},
                         {label: "App", name:"faBell", isOn: false}
                     ],
-                    iconError: "",
                     header: {
                         title: "Available to spend is within %s of credit limit ",
                         isOn: false
@@ -158,13 +145,12 @@ const initialState = {
                                 inputIcon: "faDollarSign",
                                 inputPlaceholder: "Amount",
                                 inputValue: "",
-                                inputError: ""
                             }
                         },
                         rightSection: {
                             subtitle: "Select where to send alert:",
                         }
-                    }
+                    },
                 },
                 
             ]
@@ -181,7 +167,6 @@ const initialState = {
                         {label: "Text", name:"faComment", isOn: false},
                         {label: "App", name:"faBell", isOn: false}
                     ],
-                    iconError: "",
                     header: {
                         title: "Payment is scheduled",
                         isOn: false
@@ -195,7 +180,7 @@ const initialState = {
                         rightSection: {
                             subtitle: "Select where to send alert:",
                         }
-                    }
+                    },
                 },
                 {
                     isLoading: false,
@@ -204,7 +189,6 @@ const initialState = {
                         {label: "Text", name:"faComment", isOn: false},
                         {label: "App", name:"faBell", isOn: false}
                     ],
-                    iconError: "",
                     header: {
                         title: "Payment is due in %d days ",
                         isOn: false
@@ -218,13 +202,12 @@ const initialState = {
                                 inputIcon: "",
                                 inputPlaceholder: "5 days",
                                 inputValue: "",
-                                inputError: ""
                             }
                         },
                         rightSection: {
                             subtitle: "Select where to send alert:",
                         }
-                    }
+                    },
                 },
                 {
                     isLoading: false,
@@ -233,7 +216,6 @@ const initialState = {
                         {label: "Text", name:"faComment", isOn: false},
                         {label: "App", name:"faBell", isOn: false}
                     ],
-                    iconError: "",
                     header: {
                         title: "Promotional purchase will expire in %d days ",
                         isOn: false
@@ -247,13 +229,12 @@ const initialState = {
                                 inputIcon: "",
                                 inputPlaceholder: "14 days",
                                 inputValue: "",
-                                inputError: ""
                             }
                         },
                         rightSection: {
                             subtitle: "Select where to send alert:",
                         }
-                    }
+                    },
                 },
                 {
                     isLoading: false,
@@ -262,7 +243,6 @@ const initialState = {
                         {label: "Text", name:"faComment", isOn: false},
                         {label: "App", name:"faBell", isOn: false}
                     ],
-                    iconError: "",
                     header: {
                         title: "Account is past due",
                         isOn: false
@@ -275,7 +255,7 @@ const initialState = {
                         rightSection: {
                             subtitle: "Select where to send alert:",
                         }
-                    }
+                    },
                 },
             ]
         }

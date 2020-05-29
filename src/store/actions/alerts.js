@@ -1,16 +1,9 @@
 import initialState from "./Alerts.Data";
 
 export const GET_ALERTS_DATA = 'GET_ALERTS_DATA';
-export const UPDATE_INPUT_VALUE = 'UPDATE_INPUT_VALUE';
-export const SET_ERROR_MESSAGE = 'SET_ERROR_MESSAGE';
-export const SET_COMMUNICATION_METHOD = 'SET_COMMUNICATION_METHOD';
-export const SET_COMMUNICATION_ERROR = 'SET_COMMUNICATION_ERROR';
-export const SET_ITEM_ISLOADING = 'SET_ITEM_ISLOADING';
-export const UNSET_COMMUNICATION_METHOD = 'UNSET_COMMUNICATION_METHOD';
-export const UNSET_COMMUNICATION_ERROR = 'UNSET_COMMUNICATION_ERROR';
-export const UNSET_ITEM_ISLOADING = 'UNSET_ITEM_ISLOADING';
 export const TURN_NOTIFICATION_ON = 'TURN_NOTIFICATION_ON';
 export const TURN_NOTIFICATION_OFF = 'TURN_NOTIFICATION_OFF';
+export const SAVE_NOTIFICATION = 'SAVE_NOTIFICATION';
 
 export const getAlertsData = () => {
     return async dispatch => {
@@ -32,85 +25,33 @@ export const getAlertsData = () => {
     }
 }
 
-export const updateInputValue = (alertIndex, itemIndex, value) => {
-    return {
-        type: UPDATE_INPUT_VALUE,
-        alertIndex,
-        itemIndex,
-        value
-    }
-}
-
-export const setErrorMessage = (alertIndex, itemIndex, errorMessage) => {
-    return {
-        type: SET_ERROR_MESSAGE, 
-        alertIndex, 
-        itemIndex, 
-        errorMessage
-    }
-}
-
-export const setCommunicationMethod = (alertIndex, itemIndex, iconIndex) => {
-    return {
-        type: SET_COMMUNICATION_METHOD, 
-        alertIndex, 
-        itemIndex, 
-        iconIndex
-    }
-}
-
-export const setCommunicationError = (alertIndex, itemIndex, errorMessage) => {
-    return {
-        type: SET_COMMUNICATION_ERROR, 
-        alertIndex, 
-        itemIndex, 
-        errorMessage
-    }
-}
-
-export const unSetCommunicationMethod = (alertIndex, itemIndex, iconIndex) => {
-    return {
-        type: UNSET_COMMUNICATION_METHOD, 
-        alertIndex, 
-        itemIndex, 
-        iconIndex
-    }
-}
-
-export const unSetCommunicationError = (alertIndex, itemIndex) => {
-    return {
-        type: UNSET_COMMUNICATION_ERROR, 
-        alertIndex, 
-        itemIndex 
-    }
-}
-
-export const turnNotificationOn = ( alertIndex, itemIndex ) =>{
+export const turnNotificationOn = ( alertIndex, itemIndex, inputValue="", communicationMethods ) =>{
     return async dispatch => {
-        dispatch({ type: SET_ITEM_ISLOADING, alertIndex, itemIndex});
-            try {
-                //Simulating Ajax Request
-                let promise = new Promise((resolve, reject ) => {
-                    setTimeout(() => resolve(initialState.alerts), 3000)
-                })
+        try {
+            //Simulating Ajax Request
+            let promise = new Promise((resolve, reject ) => {
+                setTimeout(() => resolve(initialState.alerts), 3000)
+            })
 
-                let response = await promise;
+            let response = await promise;
 
-                dispatch({
-                    type: TURN_NOTIFICATION_ON, 
-                    alertIndex, 
-                    itemIndex
-                })
-            }catch(error){
-                console.log(error);
-            }
-        dispatch({ type: UNSET_ITEM_ISLOADING, alertIndex, itemIndex});
+            dispatch({
+                type: TURN_NOTIFICATION_ON, 
+                alertIndex, 
+                itemIndex,
+                inputValue, 
+                communicationMethods
+            })
+        }catch(error){
+            console.log(error);
+        }
     }
 }
 
-export const turnNotificationOff = ( alertIndex, itemIndex ) =>{
+
+
+export const turnNotificationOff = ( alertIndex, itemIndex, inputValue="", communicationMethods  ) =>{
     return async dispatch => {
-        dispatch({ type: SET_ITEM_ISLOADING, alertIndex, itemIndex});
             try {
                 //Simulating Ajax Request
                 let promise = new Promise((resolve, reject ) => {
@@ -122,11 +63,35 @@ export const turnNotificationOff = ( alertIndex, itemIndex ) =>{
                 dispatch({
                     type: TURN_NOTIFICATION_OFF, 
                     alertIndex, 
-                    itemIndex
+                    itemIndex,
+                    inputValue, 
+                    communicationMethods
                 })
             }catch(error){
                 console.log(error);
             }
-        dispatch({ type: UNSET_ITEM_ISLOADING, alertIndex, itemIndex});
+    }
+}
+
+export const saveNotification = ( alertIndex, itemIndex, inputValue="", communicationMethods ) =>{
+    return async dispatch => {
+        try {
+            //Simulating Ajax Request
+            let promise = new Promise((resolve, reject ) => {
+                setTimeout(() => resolve(initialState.alerts), 3000)
+            })
+
+            let response = await promise;
+
+            dispatch({
+                type: SAVE_NOTIFICATION, 
+                alertIndex, 
+                itemIndex,
+                inputValue, 
+                communicationMethods
+            })
+        }catch(error){
+            console.log(error);
+        }
     }
 }

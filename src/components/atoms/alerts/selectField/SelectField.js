@@ -2,7 +2,7 @@ import React from 'react';
 import styled from "styled-components";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import * as faSolid from '@fortawesome/free-solid-svg-icons';
-import { string, bool, func} from 'prop-types';
+import { object, func, string} from 'prop-types';
 
 const SelectElement = styled.select`
     width: 140px;
@@ -16,7 +16,8 @@ const ErrorMessage = styled.div`
     margin-top: 5px;
 `
 
-export default function SelectField({inputValue, changeHandler, errorMessage, hasErrors}){
+export default function SelectField({inputValue, onInputChange, inputError }){
+
     const selectOptions = () => {
         let options = [];
         for(let i=1; i<15; i++){
@@ -31,18 +32,20 @@ export default function SelectField({inputValue, changeHandler, errorMessage, ha
 
     return(
         <div>
-            <SelectElement value={inputValue} onChange={changeHandler} hasErrors={hasErrors } >
-                <option value="">Select</option>
-                {selectOptions()}
+            <SelectElement 
+                value={inputValue} 
+                onChange={onInputChange}
+                hasErrors={inputError !== '' ? true : false } >
+                    <option value="">Select</option>
+                    {selectOptions()}
             </SelectElement>
-            {errorMessage !== '' && <ErrorMessage><FontAwesomeIcon icon={faSolid["faExclamationCircle"]}/> {errorMessage}</ErrorMessage>}
+            {inputError !== '' && <ErrorMessage><FontAwesomeIcon icon={faSolid["faExclamationCircle"]}/> {inputError}</ErrorMessage>}
         </div>
     )
 }
 
 SelectField.propTypes = {
-    inputValue: string, 
-    changeHandler: func, 
-    errorMessage: string,
-    hasErrors: bool 
+    details: object,
+    inputValue: string,
+    onInputChange: func,
 }

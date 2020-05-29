@@ -1,16 +1,4 @@
 import React, {useCallback, useState} from "react";
-import {connect} from 'react-redux';
-import {
-    updateInputValue,
-    setErrorMessage,
-    setCommunicationMethod,
-    setCommunicationError,
-    unSetCommunicationMethod,
-    unSetCommunicationError,
-    turnNotificationOn,
-    turnNotificationOff
-} from "../../../store/actions/alerts";
-
 import {number, func, object} from 'prop-types';
 import styled from "styled-components";
 
@@ -55,25 +43,6 @@ export const AlertItem = ({ item, alertIndex, itemIndex }) => {
     )
 }
 
-const mapStateToProps = state => {
-    return {}
-} 
-
-const mapDispatchToProps = dispatch => {
-    return {
-        onUpdateInputValue: (alertIndex, itemIndex, value) => dispatch(updateInputValue(alertIndex, itemIndex, value)),
-        onSetErrorMessage: (alertIndex, itemIndex, errorMessage) => dispatch(setErrorMessage(alertIndex, itemIndex, errorMessage)),
-        onSetCommunicationMethod: (alertIndex, itemIndex, iconIndex) => dispatch(setCommunicationMethod(alertIndex, itemIndex, iconIndex)),
-        onSetCommunicationError: (alertIndex, itemIndex, errorMessage) => dispatch(setCommunicationError(alertIndex, itemIndex, errorMessage)),
-        onUnSetCommunicationMethod: (alertIndex, itemIndex, iconIndex) => dispatch(unSetCommunicationMethod(alertIndex, itemIndex, iconIndex)),
-        onUnSetCommunicationError: (alertIndex, itemIndex) => dispatch(unSetCommunicationError(alertIndex, itemIndex)),
-        onTurnNotificationOn: (alertIndex, itemIndex) => dispatch(turnNotificationOn(alertIndex, itemIndex)),
-        onTurnNotificationOff: (alertIndex, itemIndex) => dispatch(turnNotificationOff(alertIndex, itemIndex)),
-        
-    }
-}
-
-
 AlertItem.propTypes = {
     item: object,
     alertIndex: number, 
@@ -81,4 +50,4 @@ AlertItem.propTypes = {
     communicationMethodClick: func
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AlertItem);
+export default AlertItem;
