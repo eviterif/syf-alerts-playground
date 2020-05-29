@@ -129,8 +129,8 @@ export const AlertItem = ({ item, alertIndex, itemIndex, onTurnNotificationOn, o
         let communication_methods = communicationMethods.filter( (obj) => obj.isOn === true);
         let is_form_valid = true;
 
-        if(tmp_label === "turn on" && item.body.leftSection.input){
-            if(inputValue === ""){
+        if(tmp_label === "turn on"){
+            if(item.body.leftSection.input && inputValue === ""){
                 setInputError("Please enter a valid amount.");
                 is_form_valid = false;
             }
@@ -143,20 +143,23 @@ export const AlertItem = ({ item, alertIndex, itemIndex, onTurnNotificationOn, o
             }
         }
 
-        if(tmp_label === "turn on" && !item.body.leftSection.input){
-            if(communication_methods.length <= 0){
-                setCommunicationError("Please select delivery method.");
-            }else{
-                turnNotificationOn();
-            } 
-        }
-
         if(tmp_label === "turn off"){
             turnNotificationOff();
         }
 
         if(tmp_label === "save"){
-            saveNotification();
+            if(item.body.leftSection.input && inputValue === ''){
+                setInputError("Please enter a valid amount.");
+                is_form_valid = false;
+            }
+            if(communication_methods.length <= 0){
+                setCommunicationError("Please select delivery method.");
+                is_form_valid = false;
+            }
+            if(is_form_valid){
+                saveNotification();
+            }
+            
         }
     }
 
