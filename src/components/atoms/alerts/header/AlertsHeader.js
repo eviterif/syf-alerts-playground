@@ -10,7 +10,7 @@ export default function AlertsHeader({
     title, 
     input, 
     icons, 
-    expandAccordionHandler, 
+    expandAccordionHandler
 }){
     let header_tittle = title;
     let dollar_pattern =  /(?:%s)/;
@@ -33,7 +33,7 @@ export default function AlertsHeader({
     }
 
     return (
-        <AccordionHeaderWrapper isExpanded={isExpanded} isON={ isNotificationON ? true : false }>
+        <AccordionHeaderWrapper isExpanded={isExpanded} isON={ isNotificationON ? true : false } onClick={ () => expandAccordionHandler() } >
             <div className="accordionHeaderLeft">
                 <span>
                     {header_tittle} 
@@ -51,7 +51,7 @@ export default function AlertsHeader({
             </div>
             <div className="accordionHeaderRight">
                 <span>{ isNotificationON ? "ON" : "OFF" }</span>
-                <span className="caretDown" onClick={ () => expandAccordionHandler() } >
+                <span className="caretDown" >
                     <FontAwesomeIcon 
                         className="fontAwesomeIcon" 
                         icon={faSolid["faCaretDown"]} 

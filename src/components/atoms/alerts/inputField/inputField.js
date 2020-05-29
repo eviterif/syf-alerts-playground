@@ -58,6 +58,7 @@ const InputField = ({ details, inputValue, inputError, onInputChange}) => {
 InputField.propTypes = {
     details: object,
     inputValue: string,
+    inputError: string,
     onInputChange: func,
 }
 

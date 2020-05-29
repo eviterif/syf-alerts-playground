@@ -30,19 +30,30 @@ export const AlertItem = ({ item, alertIndex, itemIndex, onTurnNotificationOn, o
 
     const [buttonLabelClicked, setButtonLabelClicked] = useState("");
     const [loading, setLoading] = useState(false);
-    
+
+    //This function will expand/collapse the accordion
+    const expandAccordion = useCallback( () => {
+        setShowPanel(!showPanel);
+        //Discaring values when collapsing the accordion
+            setCommunicationMethods(currentCommunicationMethods.map( (obj) => ({...obj}) ))
+            setInputValue(currentInputValue);
+    },[showPanel, currentCommunicationMethods, currentInputValue] );
+
+    //This function will turn the notifcation ON.
     const turnNotificationOn = useCallback(async () => {
         setLoading(true);
         try {
             await onTurnNotificationOn( alertIndex, itemIndex, inputValue, communicationMethods);
             setInputValueHasChanged(false);
             setCommunicationMethodsHasChanged(false);
+            expandAccordion();
         } catch (err) {
             console.log(err)
         }
         setLoading(false);
-    }, [onTurnNotificationOn, setLoading, alertIndex, itemIndex, inputValue, communicationMethods]);
+    }, [onTurnNotificationOn, alertIndex, itemIndex, inputValue, communicationMethods, expandAccordion]);
 
+    //This function will turn the notifcation OFF. 
     const turnNotificationOff = useCallback(async () => {
         let reset_communication_methods = communicationMethods.map( (obj) => ({ 
             ...obj,
@@ -51,28 +62,33 @@ export const AlertItem = ({ item, alertIndex, itemIndex, onTurnNotificationOn, o
         setLoading(true);
         try {
             await onTurnNotificationOff( alertIndex, itemIndex, "", reset_communication_methods);
-            setInputValue("");
-            setInputValueHasChanged(false);
-            setCommunicationMethods(reset_communication_methods);
-            setCommunicationMethodsHasChanged(false);
+            //Reseting values
+                setInputValue("");
+                setInputValueHasChanged(false);
+                setCommunicationMethods(reset_communication_methods);
+                setCommunicationMethodsHasChanged(false);
+                expandAccordion();
         } catch (err) {
             console.log(err)
         }
         setLoading(false);
-    }, [onTurnNotificationOff, setLoading, alertIndex, itemIndex, communicationMethods]);
+    }, [onTurnNotificationOff, alertIndex, itemIndex, communicationMethods, expandAccordion]);
 
+    //This function will update notifcation values
     const saveNotification = useCallback(async () => {
         setLoading(true);
         try {
             await onSaveNotification( alertIndex, itemIndex, inputValue, communicationMethods);
-            setInputValueHasChanged(false);
-            setCommunicationMethodsHasChanged(false);
+            //Reseting values
+                setInputValueHasChanged(false);
+                setCommunicationMethodsHasChanged(false);
         } catch (err) {
             console.log(err)
         }
         setLoading(false);
-    }, [onSaveNotification, setLoading, alertIndex, itemIndex, inputValue, communicationMethods]);
+    }, [onSaveNotification, alertIndex, itemIndex, inputValue, communicationMethods]);
 
+    //This function will be executed on the input field change
     const onInputChangeHandler = (e) => {
         setInputValue(e.currentTarget.value);
         if(inputError !== '' && e.currentTarget.value !== ''){
@@ -85,6 +101,7 @@ export const AlertItem = ({ item, alertIndex, itemIndex, onTurnNotificationOn, o
         }
     }
 
+    //This function will be executed everytime the user clicks on the communications icons
     const onCommunicationMethodClickHandler = (iconIndex) => {
         if(communicationError !== ""){
             setCommunicationError("");
@@ -104,6 +121,7 @@ export const AlertItem = ({ item, alertIndex, itemIndex, onTurnNotificationOn, o
         }
     }
 
+    //This function will be executed when the user clicks one of the buttons: SAVE, TURN ON, TURN OFF
     const handleButtonClick = (label) =>{
         setButtonLabelClicked(label);
 
@@ -142,27 +160,19 @@ export const AlertItem = ({ item, alertIndex, itemIndex, onTurnNotificationOn, o
         }
     }
 
-    const expandAccordion = useCallback( () => {
-        setShowPanel(!showPanel);
-    },[showPanel, setShowPanel] )
-
     return (
         <AccordionWrapper >
             <AlertsHeader 
                 isExpanded={showPanel}
                 title={item.header.title}
                 input={item.body.leftSection.input}
-                icons={item.icons}
-                alertIndex={alertIndex}
-                itemIndex={itemIndex}
+                icons={communicationMethods}
                 expandAccordionHandler={expandAccordion}
                 isNotificationON={item.header.isOn ? true : false}
             />
             <AlertsBody 
                 item={item}
                 isExpanded={showPanel}
-                alertIndex={alertIndex}
-                itemIndex={itemIndex}
                 expandAccordionHandler={expandAccordion}
                 inputValue={inputValue}
                 onInputChangeHandler={onInputChangeHandler}
@@ -184,7 +194,9 @@ AlertItem.propTypes = {
     item: object,
     alertIndex: number, 
     itemIndex: number,
-    communicationMethodClick: func
+    onTurnNotificationOn: func,
+    onTurnNotificationOff: func,
+    onSaveNotification: func,
 }
 
 const mapStateToProps = state => {
@@ -200,5 +212,3 @@ const mapDispatchToProps = dispatch => {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(AlertItem);
-
-// export default AlertItem;
