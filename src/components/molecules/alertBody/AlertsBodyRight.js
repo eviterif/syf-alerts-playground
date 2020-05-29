@@ -5,8 +5,8 @@ import { object, func, array, string, bool} from 'prop-types';
 
 import {AccordionBodyRightIconWrapper, IconWrapper, ErrorMessage } from './AlertsBodyStyles';
 
-import AlertButton from '../button/AlertButton';
-import Loading from '../loading/Loading';
+import AlertButton from '../../atoms/button/AlertButton';
+import Loading from '../../atoms/loading/Loading';
 
 const AlertsBodyRight = ({ 
     item, 

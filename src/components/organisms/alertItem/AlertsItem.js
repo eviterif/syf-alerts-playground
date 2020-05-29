@@ -4,8 +4,8 @@ import {turnNotificationOn, turnNotificationOff, saveNotification } from "../../
 import {number, func, object} from 'prop-types';
 import styled from "styled-components";
 
-import AlertsHeader from '../../atoms/alerts/header/AlertsHeader';
-import AlertsBody from '../../atoms/alerts/body/AlertsBody';
+import AlertsHeader from '../../molecules/alertHeader/AlertsHeader';
+import AlertsBody from '../../molecules/alertBody/AlertsBody';
 
 const AccordionWrapper = styled.div`
     width: 98%;

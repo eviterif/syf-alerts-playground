@@ -1,8 +1,8 @@
 import React from 'react';
 import { string, object, func} from 'prop-types';
 
-import InputField from '../inputField/inputField';
-import SelectField from '../selectField/SelectField';
+import InputField from  '../../atoms/inputField/inputField'; 
+import SelectField from '../../atoms/selectField/SelectField'; 
 
 const AlertsBodyLeft = ({ item, inputValue, onInputChange, inputError }) => {
     return(
