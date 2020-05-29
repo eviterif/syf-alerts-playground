@@ -5,7 +5,7 @@ import Loading from './Loading';
 
 export default {
     component: Loading,
-    title: 'Atoms/Alerts/Loading Indicator',
+    title: 'Atoms/Loading',
     decorators: [withKnobs],
     // Our exports that end in "Data" are not stories.
     excludeStories: /.*Data$/,

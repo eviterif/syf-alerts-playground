@@ -1,5 +1,5 @@
 import React from "react";
-import {object, bool, string, func, array} from 'prop-types';
+import {object, bool, string, func, array, number, oneOfType} from 'prop-types';
 import {AccordionBodyWrapper} from './AlertsBodyStyles';
 
 import AlertsBodyLeft from './AlertsBodyLeft';
@@ -48,7 +48,7 @@ const AlertsBody = ({
 AlertsBody.propTypes = {
     item: object, 
     isExpanded: bool,
-    inputValue: string,
+    inputValue: oneOfType([number, string]),
     onInputChangeHandler: func,
     inputError: string,
     inputValueHasChanged: bool,

@@ -126,7 +126,6 @@ const initialState = {
                     },
                 },
                 {
-                    isLoading: false,
                     icons: [
                         {label: "Email", name:"faEnvelope", isOn: false},
                         {label: "Text", name:"faComment", isOn: false},
@@ -161,7 +160,6 @@ const initialState = {
             sectionTitle: "PAYMENT ALERTS",
             items: [
                 {
-                    isLoading: false,
                     icons: [
                         {label: "Email", name:"faEnvelope", isOn: false},
                         {label: "Text", name:"faComment", isOn: false},
@@ -183,7 +181,6 @@ const initialState = {
                     },
                 },
                 {
-                    isLoading: false,
                     icons: [
                         {label: "Email", name:"faEnvelope", isOn: false},
                         {label: "Text", name:"faComment", isOn: false},
@@ -210,7 +207,6 @@ const initialState = {
                     },
                 },
                 {
-                    isLoading: false,
                     icons: [
                         {label: "Email", name:"faEnvelope", isOn: false},
                         {label: "Text", name:"faComment", isOn: false},
@@ -237,7 +233,6 @@ const initialState = {
                     },
                 },
                 {
-                    isLoading: false,
                     icons: [
                         {label: "Email", name:"faEnvelope", isOn: false},
                         {label: "Text", name:"faComment", isOn: false},

@@ -2,7 +2,7 @@ import React from 'react';
 import styled from "styled-components";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import * as faSolid from '@fortawesome/free-solid-svg-icons';
-import { func, string} from 'prop-types';
+import { func, string, number, oneOfType} from 'prop-types';
 
 const SelectElement = styled.select`
     width: 140px;
@@ -45,7 +45,7 @@ export default function SelectField({inputValue, onInputChange, inputError }){
 }
 
 SelectField.propTypes = {
-    inputValue: string,
+    inputValue: oneOfType([number, string]),
     onInputChange: func,
     inputError: string,
 }

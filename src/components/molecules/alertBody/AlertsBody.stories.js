@@ -1,11 +1,11 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-import { withKnobs, object, boolean,number } from "@storybook/addon-knobs";
+import { withKnobs, object, boolean, number, text } from "@storybook/addon-knobs";
 import AlertsBody from './AlertsBody';
 
 export default {
     component: AlertsBody,
-    title: 'Atoms/Alerts/Body',
+    title: 'Molecules/Alert Body',
     decorators: [withKnobs],
     // Our exports that end in "Data" are not stories.
     excludeStories: /.*Data$/,
@@ -17,7 +17,6 @@ const itemData = {
         {label: "Text", name:"faComment", isOn: false},
         {label: "App", name:"faBell", isOn: false}
     ],
-    iconError: "",
     header: {
         title: "Transaction is over %s",
         isOn: false
@@ -31,98 +30,85 @@ const itemData = {
                 inputIcon: "faDollarSign",
                 inputPlaceholder: "Amount",
                 inputValue: "",
-                inputError: ""
             }
         },
         rightSection: {
             subtitle: "Select where to send alert:",
         }
-    }
+    },
 };
 
-const daysData = {
+const itemDataON = {
     icons: [
         {label: "Email", name:"faEnvelope", isOn: false},
         {label: "Text", name:"faComment", isOn: false},
         {label: "App", name:"faBell", isOn: false}
     ],
-    iconError: "",
     header: {
-        title: "Payment is due in %d days ",
-        isOn: false
+        title: "Transaction is over %s",
+        isOn: true
     },
-    body: {                       
+    body: {
         leftSection: { 
             subtitle: "Send alert when:",
-            title: "A payment is due in",
+            title: "A transaction occurs that is over:", 
             input: {
-                inputType: "select",
-                inputIcon: "",
-                inputPlaceholder: "5 days",
+                inputType: "number",
+                inputIcon: "faDollarSign",
+                inputPlaceholder: "Amount",
                 inputValue: "",
-                inputError: ""
             }
         },
         rightSection: {
             subtitle: "Select where to send alert:",
         }
-    }
-}
-
-const noInputData = {
-    icons: [
-        {label: "Email", name:"faEnvelope", isOn: false},
-        {label: "Text", name:"faComment", isOn: false},
-        {label: "App", name:"faBell", isOn: false}
-    ],
-    iconError: "",
-    header: {
-        title: "Payment is scheduled",
-        isOn: false
     },
-    body: {                     
-        leftSection: { 
-            subtitle: "Send alert when:",
-            title: "A payment is scheduled to be made on this account.", 
-        },
-        rightSection: {
-            subtitle: "Select where to send alert:",
-        }
-    }
-}
+};
 
+const icons = [
+    {label: "Email", name:"faEnvelope", isOn: false},
+    {label: "Text", name:"faComment", isOn: false},
+    {label: "App", name:"faBell", isOn: false}
+]
 
-export const Amount = () => <AlertsBody 
-                                item={object('Icons', itemData, 'Accordion')}
-                                isExpanded={boolean("Is expanded", true, 'Accordion')}
-                                alertIndex={number("Alert Index", 0, 'Accordion')}
-                                itemIndex={number("Item Index", 0, 'Accordion')}
-                                expandAccordionHandler={action('Expand/Close Accordion')}
-                                buttonClickHandler={action('Button Click')}
-                                inputChangeHandler={action('Input Change')}
-                                communicationMethodClick={action('Communication method click')}
-                            />
+const iconsON = [
+    {label: "Email", name:"faEnvelope", isOn: true},
+    {label: "Text", name:"faComment", isOn: true},
+    {label: "App", name:"faBell", isOn: true}
+]
 
-export const Days = () => <AlertsBody 
-                            item={object('Icons', daysData, 'Accordion')}
-                            isExpanded={boolean("Is expanded", true, 'Accordion')}
-                            alertIndex={number("Alert Index", 0, 'Accordion')}
-                            itemIndex={number("Item Index", 0, 'Accordion')}
-                            expandAccordionHandler={action('Expand/Close Accordion')}
-                            buttonClickHandler={action('Button Click')}
-                            inputChangeHandler={action('Input Change')}
-                            communicationMethodClick={action('Communication method click')}
-                        />
+export const NotificationOFF = () => <AlertsBody 
+                                        item={object('Icons', itemData, 'Accordion')}
+                                        isExpanded={boolean("Is expanded", true, 'Accordion')}
+                                        inputValue={number("Value", 8000, "Input Field")}
+                                        onInputChangeHandler={action('Input Change')}
+                                        inputError={text("Input Error Message", "", "Accordion")}
+                                        inputValueHasChanged={boolean("Input value changed?", false, 'Accordion')}
+                                        communicationMethods={icons}
+                                        onCommunicationMethodClickHandler={action('Cummunication Button Click')}
+                                        communicationError={text("Communication Error Message", "", "Accordion")}
+                                        communicationMethodsHasChanged={boolean("Communication has changed?", false, 'Accordion')}
+                                        handleButtonClick={action('Button Click')}
+                                        loading={boolean("Is loading?", false, 'Accordion')}
+                                        buttonLabelClicked={text("Button Label Clicked", "TURN ON", "Accordion")}
+                                    />
 
-export const NoInput = () => <AlertsBody 
-                        item={object('Icons', noInputData, 'Accordion')}
-                        isExpanded={boolean("Is expanded", true, 'Accordion')}
-                        alertIndex={number("Alert Index", 0, 'Accordion')}
-                        itemIndex={number("Item Index", 0, 'Accordion')}
-                        expandAccordionHandler={action('Expand/Close Accordion')}
-                        buttonClickHandler={action('Button Click')}
-                        communicationMethodClick={action('Communication method click')}
-                    />
+export const NotificationON = () => <AlertsBody 
+                                        item={object('Icons', itemDataON, 'Accordion')}
+                                        isExpanded={boolean("Is expanded", true, 'Accordion')}
+                                        inputValue={number("Value", 8000, "Input Field")}
+                                        onInputChangeHandler={action('Input Change')}
+                                        inputError={text("Input Error Message", "", "Accordion")}
+                                        inputValueHasChanged={boolean("Input value changed?", false, 'Accordion')}
+                                        communicationMethods={iconsON}
+                                        onCommunicationMethodClickHandler={action('Cummunication Button Click')}
+                                        communicationError={text("Communication Error Message", "", "Accordion")}
+                                        communicationMethodsHasChanged={boolean("Communication has changed?", false, 'Accordion')}
+                                        handleButtonClick={action('Button Click')}
+                                        loading={boolean("Is loading?", false, 'Accordion')}
+                                        buttonLabelClicked={text("Button Label Clicked", "TURN ON", "Accordion")}
+                                    />
+
 
 
 

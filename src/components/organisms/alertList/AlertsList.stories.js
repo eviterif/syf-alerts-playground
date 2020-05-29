@@ -15,7 +15,7 @@ const store = createStore(rootReducer, applyMiddleware(ReduxThunk));
 
 export default {
     component: AlertsList,
-    title: 'Organisms/Alerts',
+    title: 'Organisms/Alert List',
     decorators: [withKnobs],
     // Our exports that end in "Data" are not stories.
     excludeStories: /.*Data$/,

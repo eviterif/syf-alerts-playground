@@ -2,7 +2,7 @@ import React from "react"
 import styled from "styled-components";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import * as faSolid from '@fortawesome/free-solid-svg-icons';
-import { object, func, string} from 'prop-types';
+import { object, func, string, number, oneOfType} from 'prop-types';
 
 const InputFieldWrapper = styled.div`
     position: relative;
@@ -57,7 +57,7 @@ const InputField = ({ details, inputValue, inputError, onInputChange}) => {
 
 InputField.propTypes = {
     details: object,
-    inputValue: string,
+    inputValue: oneOfType([number, string]),
     inputError: string,
     onInputChange: func,
 }

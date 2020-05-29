@@ -4,7 +4,6 @@ import {connect} from 'react-redux';
 import { getAlertsData } from "../../../store/actions/alerts";
 
 import SectionTitle from '../../atoms/alerts/sectionTitle/SectionTitle'
-// import AlertItem from '../../molecules/alerts/AlertsItem';
 import AlertItem from '../alertItem/AlertsItem'
 ;import Loading from '../../atoms/alerts/loading/Loading';
 import {PageWrapper} from './AlertsListStyles';

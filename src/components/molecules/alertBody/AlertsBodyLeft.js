@@ -1,5 +1,5 @@
 import React from 'react';
-import { string, object, func} from 'prop-types';
+import { string, object, func, number, oneOfType} from 'prop-types';
 
 import InputField from  '../../atoms/inputField/inputField'; 
 import SelectField from '../../atoms/selectField/SelectField'; 
@@ -36,7 +36,7 @@ const AlertsBodyLeft = ({ item, inputValue, onInputChange, inputError }) => {
 
 AlertsBodyLeft.propTypes = {
     item: object, 
-    inputValue: string, 
+    inputValue: oneOfType([number, string]),
     onInputChange: func, 
     inputError: string
 }

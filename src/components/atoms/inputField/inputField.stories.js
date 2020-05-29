@@ -1,65 +1,51 @@
 import React from 'react';
-import { withKnobs, text, boolean } from "@storybook/addon-knobs";
+import { withKnobs, text, object, number } from "@storybook/addon-knobs";
 import { action } from '@storybook/addon-actions';
 import InputField from './inputField';
 
 export default {
     component: InputField,
-    title: 'Atoms/Alerts/Input Field',
+    title: 'Atoms/Input Field',
     decorators: [withKnobs],
     // Our exports that end in "Data" are not stories.
     excludeStories: /.*Data$/,
 };
 
-export const Amount = () => (
+const inputData = {
+    inputType: "number",
+    inputIcon: "faDollarSign",
+    inputPlaceholder: "Amount",
+    inputValue: "",
+}
+
+export const Default = () => (
     <InputField 
-        iconName={text("Icon Name", "faDollarSign", "Input Field")}
-        inputType="number" 
-        inputValue={text("Value", 8000, "Input Field")}
-        changeHandler={action("Input Change Handler")}
-        inputPlaceHolder={text("Place Holder", "Amount", "Input Field")} 
-        hasErrors={ boolean("Has errors? ", false,  "Input Field")} 
-        hasIcon={boolean("Has icon? ", true,  "Input Field") }
-        errorMessage={text("Error Message", "", "Input Field")}
-    />
+        details={object('Input Data', {...inputData, inputIcon: ""} , 'Input Field')}
+        inputValue={number("Value", 8000, "Input Field")}
+        inputError={text("Error", "", "Input Field")}
+        onInputChange={action("Input Change Handler")}/>
 );
 
-export const AmountError = () => (
+export const DefaultWithErrors = () => (
     <InputField 
-        iconName={text("Icon Name", "faDollarSign", "Input Field")}
-        inputType="number" 
-        inputValue={text("Value", "", "Input Field")}
-        changeHandler={action("Input Change Handler")}
-        inputPlaceHolder={text("Place Holder", "Amount", "Input Field")} 
-        hasErrors={ boolean("Has errors? ", true,  "Input Field")} 
-        hasIcon={boolean("Has icon? ", true,  "Input Field") }
-        errorMessage={text("Error Message", "This Field is required", "Input Field")}
-    />
+        details={object('Input Data', {...inputData, inputIcon: ""} , 'Input Field')}
+        inputValue={number("Value", 8000, "Input Field")}
+        inputError={text("Error", "This is an error", "Input Field")}
+        onInputChange={action("Input Change Handler")}/>
 );
 
-export const Number = () => (
+export const Icon = () => (
     <InputField 
-        iconName=""
-        inputType="number" 
-        inputValue={text("Value", "", "Input Field")}
-        changeHandler={action("Input Change Handler")}
-        inputPlaceHolder={text("Place Holder", "5 Days", "Input Field")} 
-        hasErrors={ boolean("Has errors? ", false,  "Input Field")} 
-        hasIcon={boolean("Has icon? ", false,  "Input Field") }
-        errorMessage={text("Error Message", "", "Input Field")}
-    />
+        details={object('Input Data', inputData, 'Input Field')}
+        inputValue={number("Value", 8000, "Input Field")}
+        inputError={text("Error", "", "Input Field")}
+        onInputChange={action("Input Change Handler")}/>
 );
 
-export const NumberError = () => (
+export const IconWithErrors = () => (
     <InputField 
-        iconName=""
-        inputType="number" 
-        inputValue={text("Value", "", "Input Field")}
-        changeHandler={action("Input Change Handler")}
-        inputPlaceHolder={text("Place Holder", "5 Days", "Input Field")} 
-        hasErrors={ boolean("Has errors? ", true,  "Input Field")} 
-        hasIcon={boolean("Has icon? ", false,  "Input Field") }
-        errorMessage={text("Error Message", "This field is required", "Input Field")}
-    />
+        details={object('Input Data', inputData, 'Input Field')}
+        inputValue={number("Value", 8000, "Input Field")}
+        inputError={text("Error", "This is an error", "Input Field")}
+        onInputChange={action("Input Change Handler")}/>
 );
-

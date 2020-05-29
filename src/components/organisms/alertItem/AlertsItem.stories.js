@@ -1,11 +1,22 @@
 import React from 'react';
+import {createStore, combineReducers, applyMiddleware, compose} from 'redux';
+import {Provider} from 'react-redux';
+import ReduxThunk from 'redux-thunk';
+import alertsReducer from '../../../store/reducer/alerts'; 
+
 import { action } from '@storybook/addon-actions';
 import { withKnobs, object } from "@storybook/addon-knobs";
 import AlertsItem from './AlertsItem';
 
+const rootReducer = combineReducers({
+    alertsData: alertsReducer,
+  });
+  
+const store = createStore(rootReducer, applyMiddleware(ReduxThunk));
+
 export default {
     component: AlertsItem,
-    title: 'Molecules/Alerts',
+    title: 'Organisms/Alert Items',
     decorators: [withKnobs],
     // Our exports that end in "Data" are not stories.
     excludeStories: /.*Data$/,
@@ -22,7 +33,6 @@ const itemData = {
         isOn: false
     },
     body: {
-        isVisible: false,
         leftSection: { 
             subtitle: "Send alert when:",
             title: "A transaction occurs that is over:", 
@@ -31,67 +41,55 @@ const itemData = {
                 inputIcon: "faDollarSign",
                 inputPlaceholder: "Amount",
                 inputValue: "",
-                inputError: ""
             }
-                
-            
         },
         rightSection: {
             subtitle: "Select where to send alert:",
         }
-    }
+    },
 };
 
-const itemActions = {
-    clickHandler: action('expand alert'),
-    communicationMethodClick: action('cumminication icon click'),
-    buttonClickHandler: action('action buttons click'),
-    inputChangeHandler: action('input change event')
-}
+export const AlertItemOFF = () => (
+    <Provider store={store}>
+        <AlertsItem 
+            item={object('Data', itemData, 'Alert' )} 
+            alertIndex="0" 
+            itemIndex="0" />
+    </Provider>
+)
 
-export const Default = () => <AlertsItem item={object('Data', itemData, 'Alert' )} alertIndex="0" itemIndex="0" {...itemActions} />
-
-const itemDateCloseOn = {
-    ...itemData,
+const itemDataON = {
     icons: [
         {label: "Email", name:"faEnvelope", isOn: true},
-        {label: "Text", name:"faComment", isOn: false},
+        {label: "Text", name:"faComment", isOn: true},
         {label: "App", name:"faBell", isOn: true}
     ],
     header: {
-        ...itemData.header,
+        title: "Transaction is over %s",
         isOn: true
     },
     body: {
-        ...itemData.body,
-        leftSection:{
-            ...itemData.body.leftSection,
+        leftSection: { 
+            subtitle: "Send alert when:",
+            title: "A transaction occurs that is over:", 
             input: {
-                ...itemData.body.leftSection.input,
-                inputValue: 4000
+                inputType: "number",
+                inputIcon: "faDollarSign",
+                inputPlaceholder: "Amount",
+                inputValue: 4000,
             }
+        },
+        rightSection: {
+            subtitle: "Select where to send alert:",
         }
-    }
-}
+    },
+};
 
-export const AlertCloseOn = () => <AlertsItem item={object('Data', itemDateCloseOn, 'Alert' )} alertIndex="0" itemIndex="0" {...itemActions} />
-
-const itemDataOpen = {
-    ...itemData,
-    body: {
-        ...itemData.body,
-        isVisible: true
-    } 
-}
-
-export const AlertOpenOff = () => <AlertsItem item={object('Data', itemDataOpen, 'Alert' )} alertIndex="0" itemIndex="0" {...itemActions} />
-
-const itemDataOpenOn = {
-    ...itemDateCloseOn,
-    body: {
-        ...itemDateCloseOn.body,
-        isVisible: true
-    }
-}
-
-export const AlertOpenOn = () => <AlertsItem item={object('Data', itemDataOpenOn, 'Alert' )} alertIndex="0" itemIndex="0" {...itemActions} />
+export const AlertItemON = () => (
+    <Provider store={store}>
+        <AlertsItem 
+            item={object('Data', itemDataON, 'Alert' )} 
+            alertIndex="0" 
+            itemIndex="0" />
+    </Provider>
+)
